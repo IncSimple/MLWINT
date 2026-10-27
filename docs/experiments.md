@@ -19,6 +19,8 @@ is retained as historical work and is not a supported workflow. Prediction CSVs
 are generated local outputs and excluded. Latency reports reflect their recorded
 hardware/workload, not a portable deployment guarantee.
 
-The next proposed experiment is documented in
-[the mild regularization plan](mild-regularization-plan.md). No mild sweep has
-been run as part of the continuation checkpoint.
+The next experiment is implemented in `src/models/run_mild_regularization.py`
+with the configuration and workflow documented in
+[the mild regularization plan](mild-regularization-plan.md). Its real EMBER
+inputs passed a dry run; the full training workflow was tested with tiny
+synthetic data. The EMBER mild sweep has not been trained.

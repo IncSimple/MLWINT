@@ -3,6 +3,8 @@
 loaders and direct ASGI requests. It needs neither data, models nor httpx.
 The experiment regression test also fits a tiny synthetic LightGBM classifier
 and checks its probabilities against a saved/reloaded Booster.
+The mild-sweep tests exercise dry runs, real training on tiny synthetic arrays,
+JSON/CSV outputs, split validation, fixed ensembles and overwrite protection.
 `python -m pytest -m integration` runs the original six model-backed cases;
 both trusted baseline artifacts must be present or these cases skip.
 Test collection is restricted to tests/ because src/ingestion/test_*.py are
