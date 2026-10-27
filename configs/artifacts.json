@@ -1,0 +1,55 @@
+{
+  "inspected": "2026-10-27",
+  "artifacts": [
+    {
+      "path": "src/models/candidates/extra_trees.joblib",
+      "bytes": 84632985,
+      "sha256": "5bd109fede72e3f6d2111c00c2ecdde3781c984c95917b2a769d156211060d99"
+    },
+    {
+      "path": "src/models/candidates/lightgbm_baseline.txt",
+      "bytes": 3658440,
+      "sha256": "8bd81eb461d2e9c67b2ea288f655e7f54ea95d20d2349d13902fc98e29d73a9a"
+    },
+    {
+      "path": "src/models/candidates/lightgbm_regularized.txt",
+      "bytes": 2261763,
+      "sha256": "ca775228191cb2b67389cdefd62bd144887d8124c6b63a5c8bda4c41285d5a6d"
+    },
+    {
+      "path": "src/models/candidates/random_forest.joblib",
+      "bytes": 38803065,
+      "sha256": "342cdbbebf163ddf6a1583faa10d969fd68f0ede9bbf84f986a17829d02af2ff"
+    },
+    {
+      "path": "src/models/candidates/regularization_experiment/lightgbm_regularized.txt",
+      "bytes": 3714844,
+      "sha256": "a70a6e04983aa6535b57be62c1943ba74cadaba45cb6f98e4fff1d57f81aa289"
+    },
+    {
+      "path": "src/models/candidates/regularization_experiment/xgboost_regularized.json",
+      "bytes": 8295969,
+      "sha256": "0acbd3a2e92a7e2aa00b9b0c4206922f5db9c2afe4ba01b2fa0c18c0317eef15"
+    },
+    {
+      "path": "src/models/candidates/xgboost_ember.json",
+      "bytes": 9966773,
+      "sha256": "b1d190ee768e1d4aae47ea66ec266077bd531c7e329589925eb35bc1539c21b9"
+    },
+    {
+      "path": "src/models/lightgbm_ember.txt",
+      "bytes": 1156852,
+      "sha256": "c3b70e3a00079af767d6cb557c39cda5016a0e43fff5f02aed15635bc95cc46d"
+    },
+    {
+      "path": "src/models/lightgbm_ember_v2.txt",
+      "bytes": 3658440,
+      "sha256": "8bd81eb461d2e9c67b2ea288f655e7f54ea95d20d2349d13902fc98e29d73a9a"
+    },
+    {
+      "path": "reports/ember/model_comparison/split_indices.npz",
+      "bytes": 800766,
+      "sha256": "21a0b569e98c2726a4ee791a27daa1824080716d76751d909b1e3bab895a99c7"
+    }
+  ]
+}

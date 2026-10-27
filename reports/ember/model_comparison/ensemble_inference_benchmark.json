@@ -1,0 +1,11 @@
+{
+  "validation_samples": 15000,
+  "warmup_runs": 2,
+  "timed_runs": 10,
+  "median_seconds": 0.15998265001690015,
+  "mean_seconds": 0.1590427099959925,
+  "min_seconds": 0.14367040002252907,
+  "max_seconds": 0.17180420004297048,
+  "median_ms_per_1000_samples": 10.665510001126677,
+  "probability_count": 15000
+}

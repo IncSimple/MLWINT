@@ -1,0 +1,56 @@
+[
+  {
+    "training_records": 5000,
+    "train_roc_auc": 0.9999998399280573,
+    "validation_roc_auc": 0.995208408888889,
+    "train_log_loss": 0.023116132141910037,
+    "validation_log_loss": 0.0871622530576612,
+    "roc_auc_gap": 0.004791431039168348,
+    "log_loss_gap": 0.06404612091575117
+  },
+  {
+    "training_records": 10000,
+    "train_roc_auc": 0.9999995599808329,
+    "validation_roc_auc": 0.995208408888889,
+    "train_log_loss": 0.02340570726105166,
+    "validation_log_loss": 0.0871622530576612,
+    "roc_auc_gap": 0.004791151091943946,
+    "log_loss_gap": 0.06375654579660954
+  },
+  {
+    "training_records": 20000,
+    "train_roc_auc": 0.9999990599878175,
+    "validation_roc_auc": 0.995208408888889,
+    "train_log_loss": 0.02352350969346503,
+    "validation_log_loss": 0.0871622530576612,
+    "roc_auc_gap": 0.004790651098928511,
+    "log_loss_gap": 0.06363874336419617
+  },
+  {
+    "training_records": 35000,
+    "train_roc_auc": 0.999997668530859,
+    "validation_roc_auc": 0.995208408888889,
+    "train_log_loss": 0.023626611606386627,
+    "validation_log_loss": 0.0871622530576612,
+    "roc_auc_gap": 0.004789259641970078,
+    "log_loss_gap": 0.06353564145127458
+  },
+  {
+    "training_records": 50000,
+    "train_roc_auc": 0.9999976303953556,
+    "validation_roc_auc": 0.995208408888889,
+    "train_log_loss": 0.023611219990798522,
+    "validation_log_loss": 0.0871622530576612,
+    "roc_auc_gap": 0.0047892215064666566,
+    "log_loss_gap": 0.06355103306686269
+  },
+  {
+    "training_records": 70000,
+    "train_roc_auc": 0.9999977020408164,
+    "validation_roc_auc": 0.995208408888889,
+    "train_log_loss": 0.02352066867400934,
+    "validation_log_loss": 0.0871622530576612,
+    "roc_auc_gap": 0.004789293151927443,
+    "log_loss_gap": 0.06364158438365186
+  }
+]

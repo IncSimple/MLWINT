@@ -1,0 +1,24 @@
+{
+  "LightGBM": {
+    "validation_samples": 15000,
+    "warmup_runs": 2,
+    "timed_runs": 10,
+    "median_seconds": 0.10563164995983243,
+    "mean_seconds": 0.10442398000741378,
+    "min_seconds": 0.09055149997584522,
+    "max_seconds": 0.11158070003148168,
+    "median_ms_per_1000_samples": 7.042109997322162,
+    "last_prediction_count": 15000
+  },
+  "XGBoost": {
+    "validation_samples": 15000,
+    "warmup_runs": 2,
+    "timed_runs": 10,
+    "median_seconds": 0.058547249995172024,
+    "mean_seconds": 0.05706325998762622,
+    "min_seconds": 0.045831199968233705,
+    "max_seconds": 0.0660079000517726,
+    "median_ms_per_1000_samples": 3.9031499996781354,
+    "last_prediction_count": 15000
+  }
+}

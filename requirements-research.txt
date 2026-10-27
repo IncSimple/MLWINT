@@ -1,0 +1,7 @@
+-r requirements.txt
+pandas==3.1.0
+matplotlib==3.11.2
+# Optional upstream extractor: see docs/installation.md before installing.
+# The observed LIEF version is recorded, not a raw-PE compatibility claim.
+lief==1.0.0
+ember @ git+https://github.com/elastic/ember.git@d97a0b523de02f3fe5ea6089d080abacab6ee931

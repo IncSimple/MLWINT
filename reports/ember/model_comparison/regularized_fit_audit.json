@@ -1,0 +1,24 @@
+{
+  "model": "src\\models\\candidates\\lightgbm_regularized.txt",
+  "boosting_iterations": 1200,
+  "training": {
+    "records": 70000,
+    "roc_auc": 0.9967780636734694,
+    "pr_auc": 0.9970257224796216,
+    "log_loss": 0.08986181750708906,
+    "accuracy": 0.9736285714285714,
+    "f1": 0.9735855536158887
+  },
+  "validation": {
+    "records": 15000,
+    "roc_auc": 0.9926564266666666,
+    "pr_auc": 0.9929140403517275,
+    "log_loss": 0.11636464451041788,
+    "accuracy": 0.9567333333333333,
+    "f1": 0.95660894564418
+  },
+  "gaps": {
+    "roc_auc_train_minus_validation": 0.004121637006802792,
+    "log_loss_validation_minus_train": 0.026502827003328816
+  }
+}
