@@ -9,6 +9,8 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 
+from src.models.probabilities import lightgbm_probability as lgb_probability
+
 from sklearn.metrics import (
     accuracy_score,
     average_precision_score,
@@ -96,10 +98,6 @@ def load_xgboost(path):
     model = xgb.XGBClassifier()
     model.load_model(str(path))
     return model
-
-
-def lgb_probability(model, features):
-    return np.asarray(model.predict(features), dtype=np.float64)
 
 
 def xgb_probability(model, features):

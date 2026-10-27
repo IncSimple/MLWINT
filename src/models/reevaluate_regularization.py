@@ -5,6 +5,8 @@ import json
 import lightgbm as lgb
 import numpy as np
 import xgboost as xgb
+
+from src.models.probabilities import lightgbm_probability as lgb_prob
 from sklearn.metrics import (
     accuracy_score,
     average_precision_score,
@@ -43,14 +45,6 @@ def load_xgb(path):
     model = xgb.XGBClassifier()
     model.load_model(str(path))
     return model
-
-
-def lgb_prob(model, features):
-    # Booster.predict returns probabilities; LGBMClassifier requires
-    # predict_proba to obtain probabilities.
-    if isinstance(model, lgb.Booster):
-        return np.asarray(model.predict(features), dtype=np.float64)
-    return model.predict_proba(features)[:, 1].astype(np.float64)
 
 
 def xgb_prob(model, features):
