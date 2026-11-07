@@ -1,0 +1,125 @@
+{
+  "primary": "B",
+  "challenger": "A",
+  "primary_name": "B LightGBM",
+  "challenger_name": "A XGBoost",
+  "ensemble_effective_weights": {
+    "lgbm": 0.5,
+    "xgb": 0.5
+  },
+  "calibration": {
+    "xgb": {
+      "slope": 0.8767576283807422,
+      "intercept": 0.6553623887495379
+    },
+    "lgbm": {
+      "slope": 0.9080916456788338,
+      "intercept": 0.6021988473066476
+    },
+    "svm": {
+      "slope": 1.1534952506328056,
+      "intercept": 0.32175231537142684
+    },
+    "xgb_old": {
+      "slope": 1.1106647522251822,
+      "intercept": 0.5444953861535391
+    },
+    "lgbm_old": {
+      "slope": 1.1228152744614999,
+      "intercept": 0.5311098195838887
+    }
+  },
+  "thresholds": {
+    "A": {
+      "threshold": 0.6569094024559509,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    },
+    "B": {
+      "threshold": 0.6487686749720066,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    },
+    "C": {
+      "threshold": 0.6593758434642322,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    },
+    "D": {
+      "threshold": 0.653074422173489,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    },
+    "SVM": {
+      "threshold": 0.8678993486563312,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    },
+    "XGB_OLD": {
+      "threshold": 0.6975945734324054,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    },
+    "LGBM_OLD": {
+      "threshold": 0.6906725067321885,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    },
+    "ENS": {
+      "threshold": 0.6413205244696286,
+      "benign_rows": 179990,
+      "allowed_false_positives": 1799,
+      "actual_fpr": 0.00999499972220679
+    }
+  },
+  "ranking": [
+    {
+      "key": "B",
+      "candidate": "B LightGBM",
+      "development_recall": 0.9718111111111111,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9982932881545695
+    },
+    {
+      "key": "A",
+      "candidate": "A XGBoost",
+      "development_recall": 0.9715222222222222,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9983768615039994
+    },
+    {
+      "key": "D",
+      "candidate": "D LightGBM + SVM",
+      "development_recall": 0.9470777777777778,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9966396620242145
+    },
+    {
+      "key": "C",
+      "candidate": "C XGBoost + SVM",
+      "development_recall": 0.9459944444444445,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9967545764119317
+    }
+  ],
+  "separation": {
+    "dev_train_sha": 0,
+    "dev_train_vector": 0,
+    "dev_test_sha": 0,
+    "dev_test_vector": 0,
+    "dev_duplicate_sha": 0,
+    "dev_weeks": [
+      40,
+      51
+    ]
+  },
+  "development_rows": 359990,
+  "rule": "Chosen on development files (weeks 40-51) before any test scoring"
+}

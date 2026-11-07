@@ -1,0 +1,115 @@
+{
+  "format": ".NET",
+  "key": "dotnet",
+  "verdicts": {
+    "malicious": {
+      "rule": "ensemble probability >= threshold",
+      "threshold": 0.9192016830980897,
+      "calibration_false_alarm_target": 0.005,
+      "allowed_clean_files": 150
+    },
+    "suspicious": {
+      "rule": "threshold <= ensemble probability < malicious threshold",
+      "threshold": 0.46910916702625954,
+      "calibration_false_alarm_target": 0.03,
+      "allowed_clean_files": 900
+    },
+    "clean": {
+      "rule": "below the suspicious threshold"
+    }
+  },
+  "ensemble": {
+    "weights": {
+      "xgb": 0.5,
+      "lgbm": 0.5
+    },
+    "calibration": {
+      "xgb": {
+        "slope": 0.9556705141812135,
+        "intercept": -0.4518418945952226
+      },
+      "lgbm": {
+        "slope": 0.9504722543283274,
+        "intercept": -0.4530634244543301
+      }
+    },
+    "formula": "sum over models of weight * sigmoid(slope * raw_margin + intercept)",
+    "raw_margin": {
+      "xgb": "XGBoost inplace_predict(predict_type='margin')",
+      "lgbm": "LightGBM predict(raw_score=True)"
+    }
+  },
+  "models": {
+    "xgb": {
+      "file": "experiments/dotnet-fourway-v1/xgboost-v1/XGB_DOTNET.ubj",
+      "sha256": "b284314287912c1babfd5541070ab11497ff7bb770dea0193a6f1496c4f8b07c"
+    },
+    "lgbm": {
+      "file": "experiments/dotnet-fourway-v1/lightgbm-v1/LGBM_DOTNET.txt",
+      "sha256": "11d5e236445819e1b999ee1462ff53f157c2764e14bb810aa62b6695940dfaa1"
+    }
+  },
+  "features": "EMBER2024 thrember PEFeatureExtractor, 2,568 values",
+  "calibration_set": {
+    "source": "development weeks 40-51 (3 saved score files)",
+    "files": 60000,
+    "clean_files": 30000
+  },
+  "test_check": {
+    "format": ".NET",
+    "test_files": 59953,
+    "malware": {
+      "malicious": 0.9132,
+      "suspicious": 0.06573333333333334,
+      "clean_missed": 0.021066666666666668,
+      "missed_files": 632
+    },
+    "clean_files": {
+      "malicious_false_alarm": 0.004774146162320969,
+      "suspicious": 0.019997996861750075,
+      "clean": 0.975227856975929,
+      "false_alarm_files": 143,
+      "suspicious_files": 599
+    },
+    "flagged_malware": 0.9789333333333333,
+    "old_1pct_rule": {
+      "recall": 0.9436,
+      "false_alarm_rate": 0.008913965212165727
+    },
+    "calibration_check": {
+      "malware_malicious": 0.9101666666666667,
+      "malware_flagged": 0.9805333333333334,
+      "clean_malicious": 0.005,
+      "clean_suspicious": 0.025
+    },
+    "weekly_missed_malware": {
+      "52": 0.0196,
+      "53": 0.0188,
+      "54": 0.018,
+      "55": 0.0256,
+      "56": 0.0184,
+      "57": 0.0224,
+      "58": 0.0184,
+      "59": 0.0236,
+      "60": 0.0184,
+      "61": 0.0236,
+      "62": 0.0248,
+      "63": 0.0212
+    },
+    "weekly_malicious_false_alarms": {
+      "52": 0.0048,
+      "53": 0.0032,
+      "54": 0.005293159609120521,
+      "55": 0.0016,
+      "56": 0.0028022417934347476,
+      "57": 0.0064,
+      "58": 0.0156,
+      "59": 0.004,
+      "60": 0.004,
+      "61": 0.004,
+      "62": 0.002,
+      "63": 0.003601440576230492
+    }
+  },
+  "roles_file": "experiments/dotnet-fourway-v1/four-way-v1/roles.json"
+}

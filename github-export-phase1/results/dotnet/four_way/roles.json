@@ -1,0 +1,105 @@
+{
+  "primary": "A",
+  "challenger": "B",
+  "primary_name": "A XGBoost",
+  "challenger_name": "B LightGBM",
+  "ensemble_effective_weights": {
+    "xgb": 0.5,
+    "lgbm": 0.5
+  },
+  "calibration": {
+    "xgb": {
+      "slope": 0.9556705141812135,
+      "intercept": -0.4518418945952226
+    },
+    "lgbm": {
+      "slope": 0.9504722543283274,
+      "intercept": -0.4530634244543301
+    },
+    "svm": {
+      "slope": 0.00026967789380456277,
+      "intercept": -0.31829675351099707
+    }
+  },
+  "thresholds": {
+    "A": {
+      "threshold": 0.8405981550433171,
+      "benign_rows": 30000,
+      "allowed_false_positives": 300,
+      "actual_fpr": 0.01
+    },
+    "B": {
+      "threshold": 0.843333484560552,
+      "benign_rows": 30000,
+      "allowed_false_positives": 300,
+      "actual_fpr": 0.01
+    },
+    "C": {
+      "threshold": 0.8270065090133644,
+      "benign_rows": 30000,
+      "allowed_false_positives": 300,
+      "actual_fpr": 0.01
+    },
+    "D": {
+      "threshold": 0.8343236974534544,
+      "benign_rows": 30000,
+      "allowed_false_positives": 300,
+      "actual_fpr": 0.01
+    },
+    "SVM": {
+      "threshold": 0.9294928690830752,
+      "benign_rows": 30000,
+      "allowed_false_positives": 300,
+      "actual_fpr": 0.01
+    },
+    "ENS": {
+      "threshold": 0.8320372402553021,
+      "benign_rows": 30000,
+      "allowed_false_positives": 300,
+      "actual_fpr": 0.01
+    }
+  },
+  "ranking": [
+    {
+      "key": "A",
+      "candidate": "A XGBoost",
+      "development_recall": 0.9451,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9974340385967562
+    },
+    {
+      "key": "B",
+      "candidate": "B LightGBM",
+      "development_recall": 0.9425,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9972763237305539
+    },
+    {
+      "key": "C",
+      "candidate": "C XGBoost + SVM",
+      "development_recall": 0.9124,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9956520644201962
+    },
+    {
+      "key": "D",
+      "candidate": "D LightGBM + SVM",
+      "development_recall": 0.9071666666666667,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9955408072743215
+    }
+  ],
+  "separation": {
+    "dev_train_sha": 0,
+    "dev_train_vector": 0,
+    "dev_test_sha": 0,
+    "dev_test_vector": 0,
+    "dev_duplicate_sha": 0,
+    "dev_weeks": [
+      40,
+      51
+    ]
+  },
+  "development_rows": 60000,
+  "rule": "Chosen on development files (weeks 40-51) before any test scoring"
+}

@@ -1,0 +1,168 @@
+{
+  "status": "PDF_RETRAIN_0_51_COMPLETE",
+  "primary": "A XGBoost",
+  "challenger": "B LightGBM",
+  "ensemble_effective_weights": {
+    "xgb": 0.5,
+    "lgbm": 0.5
+  },
+  "selection": {
+    "xgboost_rounds": 289,
+    "lightgbm_rounds": 253,
+    "svm_alpha": 0.01,
+    "svm_epochs": 3
+  },
+  "ranking_on_weeks_48_51": [
+    {
+      "key": "A",
+      "candidate": "A XGBoost",
+      "recall": 0.977,
+      "false_alarm_rate": 0.01,
+      "ap": 0.9981309931617188
+    },
+    {
+      "key": "B",
+      "candidate": "B LightGBM",
+      "recall": 0.975,
+      "false_alarm_rate": 0.01,
+      "ap": 0.998193520862608
+    },
+    {
+      "key": "C",
+      "candidate": "C XGBoost + SVM",
+      "recall": 0.9685,
+      "false_alarm_rate": 0.01,
+      "ap": 0.9974787564809262
+    },
+    {
+      "key": "D",
+      "candidate": "D LightGBM + SVM",
+      "recall": 0.9645,
+      "false_alarm_rate": 0.01,
+      "ap": 0.9974421808954929
+    }
+  ],
+  "threshold_benign_rows": 2000,
+  "test": [
+    {
+      "model": "new 0-51 A XGBoost",
+      "recall": 0.952,
+      "false_alarm_rate": 0.029,
+      "fp": 174,
+      "fn": 288,
+      "average_precision": 0.9930106554075178,
+      "log_loss": 0.10892276285343962
+    },
+    {
+      "model": "old 0-39 A XGBoost",
+      "recall": 0.9333333333333333,
+      "false_alarm_rate": 0.019833333333333335,
+      "fp": 119,
+      "fn": 400,
+      "average_precision": 0.9919688989948001,
+      "log_loss": 0.12237043496621179
+    },
+    {
+      "model": "new 0-51 B LightGBM",
+      "recall": 0.9473333333333334,
+      "false_alarm_rate": 0.025833333333333333,
+      "fp": 155,
+      "fn": 316,
+      "average_precision": 0.9932624759326207,
+      "log_loss": 0.10684803339586749
+    },
+    {
+      "model": "old 0-39 B LightGBM",
+      "recall": 0.9323333333333333,
+      "false_alarm_rate": 0.021333333333333333,
+      "fp": 128,
+      "fn": 406,
+      "average_precision": 0.9914985106608651,
+      "log_loss": 0.1283898713076078
+    },
+    {
+      "model": "new 0-51 C XGBoost + SVM",
+      "recall": 0.9553333333333334,
+      "false_alarm_rate": 0.029333333333333333,
+      "fp": 176,
+      "fn": 268,
+      "average_precision": 0.991626641029517,
+      "log_loss": 0.1172310802562328
+    },
+    {
+      "model": "old 0-39 C XGBoost + SVM",
+      "recall": 0.9406666666666667,
+      "false_alarm_rate": 0.0205,
+      "fp": 123,
+      "fn": 356,
+      "average_precision": 0.9905261652427707,
+      "log_loss": 0.1306313344029836
+    },
+    {
+      "model": "new 0-51 D LightGBM + SVM",
+      "recall": 0.9495,
+      "false_alarm_rate": 0.026333333333333334,
+      "fp": 158,
+      "fn": 303,
+      "average_precision": 0.9917642874759504,
+      "log_loss": 0.11663054907316962
+    },
+    {
+      "model": "old 0-39 D LightGBM + SVM",
+      "recall": 0.9415,
+      "false_alarm_rate": 0.0215,
+      "fp": 129,
+      "fn": 351,
+      "average_precision": 0.9901041513426824,
+      "log_loss": 0.1333391490465365
+    },
+    {
+      "model": "new 0-51 Final ensemble",
+      "recall": 0.9496666666666667,
+      "false_alarm_rate": 0.02666666666666667,
+      "fp": 160,
+      "fn": 302,
+      "average_precision": 0.9932757470528464,
+      "log_loss": 0.10594891114614993
+    },
+    {
+      "model": "old 0-39 Final ensemble",
+      "recall": 0.9321666666666667,
+      "false_alarm_rate": 0.021333333333333333,
+      "fp": 128,
+      "fn": 407,
+      "average_precision": 0.991955384409607,
+      "log_loss": 0.12257291717160503
+    }
+  ],
+  "weekly_recall_range": {
+    "new": [
+      0.92,
+      0.996
+    ],
+    "old": [
+      0.884,
+      0.986
+    ]
+  },
+  "new_vs_old_ensemble": {
+    "new_fixes": 115,
+    "new_adds": 42,
+    "both_wrong": 420
+  },
+  "final_models": {
+    "xgb": {
+      "file": "XGB_PDF_0-51.ubj",
+      "sha256": "fd72b10984d0e55f3ca27eefbe854a349b5e1400905f3d858bf7f286208eef6c"
+    },
+    "lgbm": {
+      "file": "LGBM_PDF_0-51.txt",
+      "sha256": "edc267c0e54a8758b91c1b1b5826930df4800a002847cdbf74c85f4681faaa30"
+    },
+    "svm": {
+      "file": "SVM_PDF_0-51.npz",
+      "sha256": "d7120a972d280b89ec0224b2a932653c4d2e5b652793603e163f8caa74323ca3"
+    }
+  },
+  "scope": "Second look at the test (first: four-way-v1). All settings fixed in advance; thresholds rest on 2,000 benign files of weeks 48-51, so they are noisier than the 12-week ones."
+}

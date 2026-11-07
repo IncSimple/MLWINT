@@ -1,0 +1,30 @@
+{
+  "status": "WIN32_LGBM_EXTENDED",
+  "model_file": "LGBM_WIN32_extended.txt",
+  "model_sha256": "7c7c37ff4b767d6409cd02bb5eefaeb5e035a58fcb985dd4593a0ff858962199",
+  "selected_rounds": 6011,
+  "evaluated_rounds": 6103,
+  "stopped_by": "patience",
+  "inner_stop_logloss": {
+    "at_2000": 0.05537772425695404,
+    "best": 0.047196774784609416
+  },
+  "overfitting_gap": {
+    "at_2000": 0.027827524290670275,
+    "at_selected": 0.039854772614735925
+  },
+  "development_old_vs_new": {
+    "old_2000": {
+      "log_loss": 0.06469537397614615,
+      "average_precision": 0.9975922970018413,
+      "roc_auc": 0.9973394859644925
+    },
+    "new_6011": {
+      "log_loss": 0.057347877677469385,
+      "average_precision": 0.998175904453971,
+      "roc_auc": 0.9979854505559276
+    }
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; thresholds, calibration and test come in the 4-way step."
+}

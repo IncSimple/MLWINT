@@ -1,0 +1,33 @@
+{
+  "status": "PDF_LGBM_TRAINED",
+  "model_file": "LGBM_PDF.txt",
+  "model_sha256": "7b9bae16d3135086a54a7261678563e50151e8613741f6c28229be317f7933b9",
+  "selected_rounds": 167,
+  "evaluated_rounds": 267,
+  "stopped_by": "patience",
+  "selector": {
+    "inner_fit_logloss": 0.018580014675043815,
+    "inner_stop_logloss": 0.07206728642901228,
+    "gap": 0.05348727175396846
+  },
+  "final_model": {
+    "training_sample": {
+      "rows": 40000,
+      "log_loss": 0.0200051484138463,
+      "average_precision": 0.9999400847942183,
+      "roc_auc": 0.9999389649999999,
+      "error_rate_at_0_5": 0.0042
+    },
+    "development": {
+      "rows": 12000,
+      "log_loss": 0.05940083421822861,
+      "average_precision": 0.9984156859484675,
+      "roc_auc": 0.9980471388888889,
+      "error_rate_at_0_5": 0.019666666666666666
+    },
+    "log_loss_gap": 0.03939568580438231,
+    "average_precision_gap": 0.0015243988457507296
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; calibration, thresholds and the sealed test come in the 4-way step. Training-sample numbers are on files the final model was trained on."
+}

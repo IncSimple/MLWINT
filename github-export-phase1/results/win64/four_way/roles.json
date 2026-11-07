@@ -1,0 +1,105 @@
+{
+  "primary": "B",
+  "challenger": "A",
+  "primary_name": "B LightGBM",
+  "challenger_name": "A XGBoost",
+  "ensemble_effective_weights": {
+    "lgbm": 0.5,
+    "xgb": 0.5
+  },
+  "calibration": {
+    "xgb": {
+      "slope": 0.8964322677295784,
+      "intercept": 0.12347690449642224
+    },
+    "lgbm": {
+      "slope": 0.8789214902559817,
+      "intercept": 0.1390553954434779
+    },
+    "svm": {
+      "slope": 0.9168575207703171,
+      "intercept": -0.006668332070091861
+    }
+  },
+  "thresholds": {
+    "A": {
+      "threshold": 0.6455087434971003,
+      "benign_rows": 60000,
+      "allowed_false_positives": 600,
+      "actual_fpr": 0.01
+    },
+    "B": {
+      "threshold": 0.6411035664387982,
+      "benign_rows": 60000,
+      "allowed_false_positives": 600,
+      "actual_fpr": 0.01
+    },
+    "C": {
+      "threshold": 0.6601984138751679,
+      "benign_rows": 60000,
+      "allowed_false_positives": 600,
+      "actual_fpr": 0.01
+    },
+    "D": {
+      "threshold": 0.6614710833050638,
+      "benign_rows": 60000,
+      "allowed_false_positives": 600,
+      "actual_fpr": 0.01
+    },
+    "SVM": {
+      "threshold": 0.8331999470852326,
+      "benign_rows": 60000,
+      "allowed_false_positives": 600,
+      "actual_fpr": 0.01
+    },
+    "ENS": {
+      "threshold": 0.6349237401878066,
+      "benign_rows": 60000,
+      "allowed_false_positives": 600,
+      "actual_fpr": 0.01
+    }
+  },
+  "ranking": [
+    {
+      "key": "B",
+      "candidate": "B LightGBM",
+      "development_recall": 0.97975,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.998852042095364
+    },
+    {
+      "key": "A",
+      "candidate": "A XGBoost",
+      "development_recall": 0.9793666666666667,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9988304235982589
+    },
+    {
+      "key": "D",
+      "candidate": "D LightGBM + SVM",
+      "development_recall": 0.9682833333333334,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.99821500613979
+    },
+    {
+      "key": "C",
+      "candidate": "C XGBoost + SVM",
+      "development_recall": 0.9680166666666666,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9981999788494555
+    }
+  ],
+  "separation": {
+    "dev_train_sha": 0,
+    "dev_train_vector": 0,
+    "dev_test_sha": 0,
+    "dev_test_vector": 0,
+    "dev_duplicate_sha": 0,
+    "dev_weeks": [
+      40,
+      51
+    ]
+  },
+  "development_rows": 120000,
+  "rule": "Chosen on development files (weeks 40-51) before any test scoring"
+}

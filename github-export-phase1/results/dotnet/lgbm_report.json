@@ -1,0 +1,33 @@
+{
+  "status": "DOTNET_LGBM_TRAINED",
+  "model_file": "LGBM_DOTNET.txt",
+  "model_sha256": "11d5e236445819e1b999ee1462ff53f157c2764e14bb810aa62b6695940dfaa1",
+  "selected_rounds": 745,
+  "evaluated_rounds": 845,
+  "stopped_by": "patience",
+  "selector": {
+    "inner_fit_logloss": 0.010783387870245959,
+    "inner_stop_logloss": 0.08751045116031728,
+    "gap": 0.07672706329007131
+  },
+  "final_model": {
+    "training_sample": {
+      "rows": 40000,
+      "log_loss": 0.014612638557294963,
+      "average_precision": 0.9999856421925891,
+      "roc_auc": 0.9999853994387544,
+      "error_rate_at_0_5": 0.001875
+    },
+    "development": {
+      "rows": 60000,
+      "log_loss": 0.06864250638353069,
+      "average_precision": 0.9972763237305539,
+      "roc_auc": 0.9972130233333334,
+      "error_rate_at_0_5": 0.026083333333333333
+    },
+    "log_loss_gap": 0.05402986782623572,
+    "average_precision_gap": 0.0027093184620352595
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; calibration, thresholds and the sealed test come in the 4-way step. Training-sample numbers are on files the final model was trained on."
+}

@@ -1,0 +1,33 @@
+{
+  "status": "DOTNET_XGB_TRAINED",
+  "model_file": "XGB_DOTNET.ubj",
+  "model_sha256": "b284314287912c1babfd5541070ab11497ff7bb770dea0193a6f1496c4f8b07c",
+  "selected_rounds": 713,
+  "evaluated_rounds": 813,
+  "stopped_by": "patience",
+  "selector": {
+    "inner_fit_logloss": 0.01141320222422827,
+    "inner_stop_logloss": 0.08816609055486294,
+    "gap": 0.07675288833063466
+  },
+  "final_model": {
+    "training_sample": {
+      "rows": 40000,
+      "log_loss": 0.014611970731004347,
+      "average_precision": 0.9999580827048637,
+      "roc_auc": 0.9999557833003101,
+      "error_rate_at_0_5": 0.00255
+    },
+    "development": {
+      "rows": 60000,
+      "log_loss": 0.06729327613585595,
+      "average_precision": 0.9974340385967562,
+      "roc_auc": 0.9973591172222221,
+      "error_rate_at_0_5": 0.025733333333333334
+    },
+    "log_loss_gap": 0.0526813054048516,
+    "average_precision_gap": 0.0025240441081075815
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; calibration, thresholds and the sealed test come in the 4-way step. Training-sample numbers are on files the final model was trained on."
+}

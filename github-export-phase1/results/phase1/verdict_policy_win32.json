@@ -1,0 +1,115 @@
+{
+  "format": "Win32",
+  "key": "win32",
+  "verdicts": {
+    "malicious": {
+      "rule": "ensemble probability >= threshold",
+      "threshold": 0.8124808387933314,
+      "calibration_false_alarm_target": 0.005,
+      "allowed_clean_files": 899
+    },
+    "suspicious": {
+      "rule": "threshold <= ensemble probability < malicious threshold",
+      "threshold": 0.26834111944703626,
+      "calibration_false_alarm_target": 0.03,
+      "allowed_clean_files": 5399
+    },
+    "clean": {
+      "rule": "below the suspicious threshold"
+    }
+  },
+  "ensemble": {
+    "weights": {
+      "lgbm": 0.5,
+      "xgb": 0.5
+    },
+    "calibration": {
+      "lgbm": {
+        "slope": 0.9080916456788338,
+        "intercept": 0.6021988473066476
+      },
+      "xgb": {
+        "slope": 0.8767576283807422,
+        "intercept": 0.6553623887495379
+      }
+    },
+    "formula": "sum over models of weight * sigmoid(slope * raw_margin + intercept)",
+    "raw_margin": {
+      "xgb": "XGBoost inplace_predict(predict_type='margin')",
+      "lgbm": "LightGBM predict(raw_score=True)"
+    }
+  },
+  "models": {
+    "lgbm": {
+      "file": "experiments/win32-fourway-v1/lightgbm-extended-v1/LGBM_WIN32_extended.txt",
+      "sha256": "7c7c37ff4b767d6409cd02bb5eefaeb5e035a58fcb985dd4593a0ff858962199"
+    },
+    "xgb": {
+      "file": "experiments/win32-fourway-v1/xgboost-extended-v1/XGB_WIN32_extended.ubj",
+      "sha256": "8ba3eab7d0ce57f77a3f035dbd3e0e0af424d475b924f4253e163b1b33d142a3"
+    }
+  },
+  "features": "EMBER2024 thrember PEFeatureExtractor, 2,568 values",
+  "calibration_set": {
+    "source": "development weeks 40-51 (17 saved score files)",
+    "files": 359990,
+    "clean_files": 179990
+  },
+  "test_check": {
+    "format": "Win32",
+    "test_files": 359991,
+    "malware": {
+      "malicious": 0.9521777777777778,
+      "suspicious": 0.027811111111111113,
+      "clean_missed": 0.02001111111111111,
+      "missed_files": 3602
+    },
+    "clean_files": {
+      "malicious_false_alarm": 0.005533610013834025,
+      "suspicious": 0.02320671589135012,
+      "clean": 0.9712596740948158,
+      "false_alarm_files": 996,
+      "suspicious_files": 4177
+    },
+    "flagged_malware": 0.9799888888888889,
+    "old_1pct_rule": {
+      "recall": 0.9648277777777777,
+      "false_alarm_rate": 0.00994494169152902
+    },
+    "calibration_check": {
+      "malware_malicious": 0.9593333333333334,
+      "malware_flagged": 0.9863944444444445,
+      "clean_malicious": 0.004994721928996055,
+      "clean_suspicious": 0.02500138896605367
+    },
+    "weekly_missed_malware": {
+      "52": 0.014733333333333333,
+      "53": 0.015333333333333332,
+      "54": 0.015866666666666668,
+      "55": 0.014133333333333333,
+      "56": 0.014333333333333333,
+      "57": 0.018533333333333332,
+      "58": 0.014266666666666667,
+      "59": 0.022466666666666666,
+      "60": 0.0244,
+      "61": 0.029066666666666668,
+      "62": 0.025733333333333334,
+      "63": 0.031266666666666665
+    },
+    "weekly_malicious_false_alarms": {
+      "52": 0.0034002266817787855,
+      "53": 0.0034666666666666665,
+      "54": 0.003933595573038203,
+      "55": 0.005266666666666667,
+      "56": 0.0036,
+      "57": 0.00753383558903927,
+      "58": 0.0036676447052547347,
+      "59": 0.007266666666666667,
+      "60": 0.004333333333333333,
+      "61": 0.0061333333333333335,
+      "62": 0.0054670311354090275,
+      "63": 0.012334155610374025
+    }
+  },
+  "roles_file": "experiments/win32-fourway-v1/four-way-full-dev-v1/roles.json"
+}

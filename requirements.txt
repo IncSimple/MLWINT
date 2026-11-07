@@ -1,11 +1,12 @@
-# Versions observed in the existing Python 3.13.3 environment.
-numpy==2.5.4
-lightgbm==4.7.0
+# Phase 1 pipeline (training and evaluation on Google Colab)
+numpy
+scipy
+scikit-learn
+matplotlib
+psutil
 xgboost==3.4.1
-fastapi==0.162.0
-pydantic==2.14.1
-starlette==1.10.0
-uvicorn==0.54.0
-scikit-learn==1.9.1
-scipy==1.18.1
-joblib==1.6.0
+lightgbm==4.7.0
+
+# Dataset preparation on the PC (separate EMBER2024 environment)
+# thrember            # EMBER2024 feature extractor
+# huggingface_hub     # pinned EMBER2024 downloads

@@ -1,0 +1,396 @@
+{
+  "status": "WIN32_FOUR_WAY_COMPLETE",
+  "primary": "B LightGBM",
+  "challenger": "A XGBoost",
+  "ensemble_effective_weights": {
+    "lgbm": 0.5,
+    "xgb": 0.5
+  },
+  "development_rows": 359990,
+  "test_rows": 359991,
+  "development_ranking": [
+    {
+      "key": "B",
+      "candidate": "B LightGBM",
+      "development_recall": 0.9718111111111111,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9982932881545695
+    },
+    {
+      "key": "A",
+      "candidate": "A XGBoost",
+      "development_recall": 0.9715222222222222,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9983768615039994
+    },
+    {
+      "key": "D",
+      "candidate": "D LightGBM + SVM",
+      "development_recall": 0.9470777777777778,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9966396620242145
+    },
+    {
+      "key": "C",
+      "candidate": "C XGBoost + SVM",
+      "development_recall": 0.9459944444444445,
+      "development_false_alarm_rate": 0.00999499972220679,
+      "development_ap": 0.9967545764119317
+    }
+  ],
+  "test": [
+    {
+      "model": "A XGBoost",
+      "recall": 0.9644277777777778,
+      "false_alarm_rate": 0.009578256690612309,
+      "fp": 1724,
+      "fn": 6403,
+      "average_precision": 0.9980956282339267,
+      "roc_auc": 0.9979331078745296,
+      "log_loss": 0.05694829591410303,
+      "development_false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "B LightGBM",
+      "recall": 0.9646722222222223,
+      "false_alarm_rate": 0.010211621692195721,
+      "fp": 1838,
+      "fn": 6359,
+      "average_precision": 0.997900712997792,
+      "roc_auc": 0.9977248688669,
+      "log_loss": 0.060230970019672904,
+      "development_false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "C XGBoost + SVM",
+      "recall": 0.9404611111111111,
+      "false_alarm_rate": 0.008183742520459357,
+      "fp": 1473,
+      "fn": 10717,
+      "average_precision": 0.9967071810328896,
+      "roc_auc": 0.9963634367829504,
+      "log_loss": 0.07953397396747786,
+      "development_false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "D LightGBM + SVM",
+      "recall": 0.9412444444444444,
+      "false_alarm_rate": 0.008805995855348322,
+      "fp": 1585,
+      "fn": 10576,
+      "average_precision": 0.996513270941818,
+      "roc_auc": 0.9961487716978443,
+      "log_loss": 0.08115573268377427,
+      "development_false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "Final ensemble (B LightGBM + A XGBoost)",
+      "recall": 0.9648277777777777,
+      "false_alarm_rate": 0.00994494169152902,
+      "fp": 1790,
+      "fn": 6331,
+      "average_precision": 0.9980648223148366,
+      "roc_auc": 0.9979045335137127,
+      "log_loss": 0.05747276752931855,
+      "development_false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "SVM alone (reference)",
+      "recall": 0.8413555555555555,
+      "false_alarm_rate": 0.005661394180820152,
+      "fp": 1019,
+      "fn": 28556,
+      "average_precision": 0.9901499007967185,
+      "roc_auc": 0.9886563109791292,
+      "log_loss": 0.13498514800909064,
+      "development_false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "Old XGBoost 2,000 (reference)",
+      "recall": 0.9566777777777777,
+      "false_alarm_rate": 0.009233795023084487,
+      "fp": 1662,
+      "fn": 7798,
+      "average_precision": 0.9976372902419265,
+      "roc_auc": 0.9974403263836031,
+      "log_loss": 0.06410946525789314,
+      "development_false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "Old LightGBM 2,000 (reference)",
+      "recall": 0.9567944444444444,
+      "false_alarm_rate": 0.010172730858765161,
+      "fp": 1831,
+      "fn": 7777,
+      "average_precision": 0.9974698872275233,
+      "roc_auc": 0.9972562728753722,
+      "log_loss": 0.06637722478564738,
+      "development_false_alarm_rate": 0.00999499972220679
+    }
+  ],
+  "worst_test_week": {
+    "A": 63,
+    "B": 63,
+    "C": 60,
+    "D": 60,
+    "ENS": 63
+  },
+  "weekly_recall_range": {
+    "A XGBoost": [
+      0.9482666666666667,
+      0.9744
+    ],
+    "B LightGBM": [
+      0.9499333333333333,
+      0.9746
+    ],
+    "C XGB+SVM": [
+      0.9203333333333333,
+      0.9536666666666667
+    ],
+    "D LGBM+SVM": [
+      0.9206666666666666,
+      0.9540666666666666
+    ],
+    "Final ensemble": [
+      0.9494666666666667,
+      0.9753333333333334
+    ]
+  },
+  "overfitting_gap": [
+    {
+      "model": "A XGBoost",
+      "split": "training sample",
+      "rows": 119859,
+      "log_loss": 0.011353143319592847,
+      "average_precision": 0.9999945877076675,
+      "roc_auc": 0.9999945207285067,
+      "recall": 0.9989805127519471,
+      "false_alarm_rate": 0.0005164514785506039
+    },
+    {
+      "model": "A XGBoost",
+      "split": "development",
+      "rows": 359990,
+      "log_loss": 0.050287434295860266,
+      "average_precision": 0.9983768615039994,
+      "roc_auc": 0.9981973485872673,
+      "recall": 0.9715222222222222,
+      "false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "A XGBoost",
+      "split": "test",
+      "rows": 359991,
+      "log_loss": 0.05694829591410303,
+      "average_precision": 0.9980956282339267,
+      "roc_auc": 0.9979331078745296,
+      "recall": 0.9644277777777778,
+      "false_alarm_rate": 0.009578256690612309
+    },
+    {
+      "model": "B LightGBM",
+      "split": "training sample",
+      "rows": 119859,
+      "log_loss": 0.012129870315624885,
+      "average_precision": 0.9999986619668303,
+      "roc_auc": 0.9999986660303002,
+      "recall": 0.9991142159975933,
+      "false_alarm_rate": 0.00041649312786339027
+    },
+    {
+      "model": "B LightGBM",
+      "split": "development",
+      "rows": 359990,
+      "log_loss": 0.05148565159355402,
+      "average_precision": 0.9982932881545695,
+      "roc_auc": 0.9981043352099809,
+      "recall": 0.9718111111111111,
+      "false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "B LightGBM",
+      "split": "test",
+      "rows": 359991,
+      "log_loss": 0.060230970019672904,
+      "average_precision": 0.997900712997792,
+      "roc_auc": 0.9977248688669,
+      "recall": 0.9646722222222223,
+      "false_alarm_rate": 0.010211621692195721
+    },
+    {
+      "model": "C XGB+SVM",
+      "split": "training sample",
+      "rows": 119859,
+      "log_loss": 0.05166720908471938,
+      "average_precision": 0.9997223822879093,
+      "roc_auc": 0.9997231602184898,
+      "recall": 0.9687802921415918,
+      "false_alarm_rate": 0.00136609745939192
+    },
+    {
+      "model": "C XGB+SVM",
+      "split": "development",
+      "rows": 359990,
+      "log_loss": 0.08053843750786749,
+      "average_precision": 0.9967545764119317,
+      "roc_auc": 0.9963728463001031,
+      "recall": 0.9459944444444445,
+      "false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "C XGB+SVM",
+      "split": "test",
+      "rows": 359991,
+      "log_loss": 0.07953397396747786,
+      "average_precision": 0.9967071810328896,
+      "roc_auc": 0.9963634367829504,
+      "recall": 0.9404611111111111,
+      "false_alarm_rate": 0.008183742520459357
+    },
+    {
+      "model": "D LGBM+SVM",
+      "split": "training sample",
+      "rows": 119859,
+      "log_loss": 0.05224407738683255,
+      "average_precision": 0.9996892316136096,
+      "roc_auc": 0.9996897207638898,
+      "recall": 0.9692148276899422,
+      "false_alarm_rate": 0.0018658892128279884
+    },
+    {
+      "model": "D LGBM+SVM",
+      "split": "development",
+      "rows": 359990,
+      "log_loss": 0.08142485830249455,
+      "average_precision": 0.9966396620242145,
+      "roc_auc": 0.9962300337364419,
+      "recall": 0.9470777777777778,
+      "false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "D LGBM+SVM",
+      "split": "test",
+      "rows": 359991,
+      "log_loss": 0.08115573268377427,
+      "average_precision": 0.996513270941818,
+      "roc_auc": 0.9961487716978443,
+      "recall": 0.9412444444444444,
+      "false_alarm_rate": 0.008805995855348322
+    },
+    {
+      "model": "Final ensemble",
+      "split": "training sample",
+      "rows": 119859,
+      "log_loss": 0.011684450508015124,
+      "average_precision": 0.9999981225083835,
+      "roc_auc": 0.9999981269851448,
+      "recall": 0.9991810676204165,
+      "false_alarm_rate": 0.00048313202832153267
+    },
+    {
+      "model": "Final ensemble",
+      "split": "development",
+      "rows": 359990,
+      "log_loss": 0.05001844348982553,
+      "average_precision": 0.9983939982979708,
+      "roc_auc": 0.9982186571167534,
+      "recall": 0.9724611111111111,
+      "false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "Final ensemble",
+      "split": "test",
+      "rows": 359991,
+      "log_loss": 0.05747276752931855,
+      "average_precision": 0.9980648223148366,
+      "roc_auc": 0.9979045335137127,
+      "recall": 0.9648277777777777,
+      "false_alarm_rate": 0.00994494169152902
+    },
+    {
+      "model": "SVM alone",
+      "split": "training sample",
+      "rows": 119859,
+      "log_loss": 0.12720908117206434,
+      "average_precision": 0.9910488542764833,
+      "roc_auc": 0.9898341908518052,
+      "recall": 0.8711267841026841,
+      "false_alarm_rate": 0.009096209912536443
+    },
+    {
+      "model": "SVM alone",
+      "split": "development",
+      "rows": 359990,
+      "log_loss": 0.14471393001468216,
+      "average_precision": 0.9884135932228901,
+      "roc_auc": 0.9867370238470038,
+      "recall": 0.8396166666666667,
+      "false_alarm_rate": 0.00999499972220679
+    },
+    {
+      "model": "SVM alone",
+      "split": "test",
+      "rows": 359991,
+      "log_loss": 0.13498514800909064,
+      "average_precision": 0.9901499007967185,
+      "roc_auc": 0.9886563109791292,
+      "recall": 0.8413555555555555,
+      "false_alarm_rate": 0.005661394180820152
+    }
+  ],
+  "paired_errors": {
+    "files_wrong_for_both_A_and_B": 7291,
+    "of_those_svm_alone_right": 1382,
+    "of_those_ensemble_right": 4,
+    "B_vs_A": {
+      "fixes": 836,
+      "adds": 906
+    },
+    "ENS_vs_primary": {
+      "fixes": 487,
+      "adds": 411
+    },
+    "C_vs_A": {
+      "fixes": 964,
+      "adds": 5027
+    },
+    "D_vs_B": {
+      "fixes": 981,
+      "adds": 4945
+    },
+    "new_vs_old_xgb": {
+      "fixes": 1786,
+      "adds": 453
+    },
+    "new_vs_old_lgbm": {
+      "fixes": 1819,
+      "adds": 408
+    }
+  },
+  "separation": {
+    "dev_train_sha": 0,
+    "dev_train_vector": 0,
+    "dev_test_sha": 0,
+    "dev_test_vector": 0,
+    "dev_duplicate_sha": 0,
+    "dev_weeks": [
+      40,
+      51
+    ]
+  },
+  "scope": "Temporal: train weeks 0-39, development 40-51, test 52-63; exact SHA/vector separation; family/near-duplicate separation not established; test previously viewed on 2026-10-29 for the old models (benchmark, not a fresh test)",
+  "artifacts": {
+    "protocol.json": "2ee3a8faa470dbe3a0f549fe7c9b131e0ea5640fc2ae31b0707577af3d9a7df1",
+    "roles.json": "9283d31a9b881e4dda8f6de7024fae3c3bb5a57bb2f669ee808ef7b1be68b1fd",
+    "test_comparison.csv": "8ff9bcf6c32862c64f47c0a95f6346591ac7334c5bb42143f47d1998ec700dd0",
+    "development_ranking.csv": "ccdb26aae6eb640491801a4dc2e643555d5a93e82d8f3b62fb33030442b0da01",
+    "test_weekly.csv": "ce865b5b340bebc2df2ead44d2eb183dbf143d8c49df68af8051df44dbbc0123",
+    "overfitting_gap.csv": "f07e82844be380a1ee5059efa8d784c90e83a935c63885a69fc3676790324776",
+    "test_predictions.npz": "589d6df8931864712760763f7829c87d9fdf96d6eea065b6f165192489d92270",
+    "win32_four_way.png": "2ac7f5d47939b42d6a741c4fcbd3896ba540eaf288ec64e801654006ac0e8494",
+    "win32_four_way.pdf": "e326fcd90ef6b5cc997830e34b836994ba4e733086853b3ae41fc412c92eabfc",
+    "win32_overfitting_gap.png": "2d43e493edb2f145fe029192b06b70b2577fe64b8875321e6a4146a7198b4199",
+    "win32_overfitting_gap.pdf": "a30140efa449e26f5a031c9bbe182784d5f2eb61d28c6c0c99880dfe99f4398b"
+  }
+}

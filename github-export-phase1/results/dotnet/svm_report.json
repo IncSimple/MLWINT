@@ -1,0 +1,102 @@
+{
+  "status": "DOTNET_SVM_TRAINED",
+  "model_file": "SVM_DOTNET.npz",
+  "model_sha256": "526235f5f2e92509b4d5009c3189058e9dba40c27e544aa574a463d39470be5f",
+  "selector_file": "SVM_DOTNET_selector.npz",
+  "selector_sha256": "d6f2d437dd36a6a01648dbbf3efa880ffada3183d433aa7d2e73963e142abd08",
+  "selected": {
+    "alpha": 1e-07,
+    "epochs": 4,
+    "inner_stop_ap": 0.9822482665630868,
+    "inner_stop_recall_at_1pct_fpr": 0.6932
+  },
+  "settings": [
+    {
+      "alpha": 1e-09,
+      "best_epoch": 3,
+      "best_stop_ap": 0.9818674477757765,
+      "epochs_run": 6,
+      "note": ""
+    },
+    {
+      "alpha": 1e-08,
+      "best_epoch": 14,
+      "best_stop_ap": 0.9819330873569209,
+      "epochs_run": 15,
+      "note": ""
+    },
+    {
+      "alpha": 1e-07,
+      "best_epoch": 4,
+      "best_stop_ap": 0.9822482665630868,
+      "epochs_run": 5,
+      "note": ""
+    },
+    {
+      "alpha": 1e-06,
+      "best_epoch": 7,
+      "best_stop_ap": 0.9821934572193085,
+      "epochs_run": 7,
+      "note": ""
+    },
+    {
+      "alpha": 1e-05,
+      "best_epoch": 10,
+      "best_stop_ap": 0.9819367650920754,
+      "epochs_run": 10,
+      "note": ""
+    },
+    {
+      "alpha": 0.0001,
+      "best_epoch": 20,
+      "best_stop_ap": 0.9818683601545249,
+      "epochs_run": 20,
+      "note": ""
+    },
+    {
+      "alpha": 0.001,
+      "best_epoch": 18,
+      "best_stop_ap": 0.9821195678649128,
+      "epochs_run": 18,
+      "note": ""
+    },
+    {
+      "alpha": 0.01,
+      "best_epoch": 11,
+      "best_stop_ap": 0.9809116700053778,
+      "epochs_run": 11,
+      "note": ""
+    }
+  ],
+  "overfitting": {
+    "fit_sample_ap": 0.9938806429114712,
+    "stop_ap": 0.9822482665630868,
+    "ap_gap": 0.011632376348384321,
+    "fit_hinge": 176.96942037658692,
+    "stop_hinge": 422.48780806274414,
+    "hinge_gap": 245.5183876861572,
+    "final_model_training_ap": 0.9933897509378383
+  },
+  "development": {
+    "selector_inner_fit_only": {
+      "average_precision": 0.9863412845251596,
+      "roc_auc": 0.9870418327777777
+    },
+    "final_all_training_rows": {
+      "average_precision": 0.9868080932553598,
+      "roc_auc": 0.9877624072222223
+    }
+  },
+  "preprocessing": {
+    "nonfinite_values_set_to_zero": 0,
+    "constant_features": 247
+  },
+  "rows": {
+    "inner_fit": 180000,
+    "inner_stop": 20000,
+    "final_training": 200000,
+    "development": 60000
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; calibration, thresholds and test come in the 4-way step."
+}

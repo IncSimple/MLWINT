@@ -1,49 +1,31 @@
-# Python and local tooling
-.venv/
-venv/
+# Python and tooling
 __pycache__/
 *.py[cod]
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.coverage*
-htmlcov/
-coverage.xml
-*.egg-info/
-build/
-dist/
-.idea/
+.venv/
+venv/
+.ipynb_checkpoints/
 .vscode/
+.idea/
 .DS_Store
 Thumbs.db
-# Credentials and machine configuration
+
+# Credentials
 .env
 .env.*
-!.env.example
 *.pem
 *.key
-*.p12
-*.pfx
 credentials.json
-# Reproducible datasets (documentation remains trackable)
-/data/raw/**
-!/data/raw/**/
-!/data/raw/**/README.md
-/data/interim/**
-/data/processed/**
-!/data/processed/**/
-!/data/processed/**/README.md
-/data/external/**
-/downloads/
-# Local trained artifacts; no global JSON/TXT/NPZ ignore rules
-/src/models/candidates/**/*.txt
-/src/models/candidates/**/*.json
-/src/models/candidates/**/*.joblib
-/src/models/lightgbm_ember.txt
-/src/models/lightgbm_ember_v2.txt
-/reports/ember/model_comparison/cli_predictions.csv
-*.log
-*.tmp
-*.bak
 
-.pytest_tmp*/
+# Datasets and exports are never committed (EMBER2024 is downloaded by the pipeline)
+data/
+exports/
+downloads/
+*.npy
+*.npz
+*.zip
+
+# Trained models go to the GitHub Release, not the repository
+release/
+*.ubj
+*.joblib
+models/*.txt

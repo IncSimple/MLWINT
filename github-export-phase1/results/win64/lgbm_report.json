@@ -1,0 +1,33 @@
+{
+  "status": "WIN64_LGBM_TRAINED",
+  "model_file": "LGBM_WIN64.txt",
+  "model_sha256": "c81bee8934565b86fc724a1a8d2b34f4bddf923744a309d0ea393b71c2620a8d",
+  "selected_rounds": 2143,
+  "evaluated_rounds": 2168,
+  "stopped_by": "patience",
+  "selector": {
+    "inner_fit_logloss": 0.0038418613569090724,
+    "inner_stop_logloss": 0.03642784213464449,
+    "gap": 0.03258598077773542
+  },
+  "final_model": {
+    "training_sample": {
+      "rows": 40000,
+      "log_loss": 0.004612677520248864,
+      "average_precision": 0.9999999676798745,
+      "roc_auc": 0.9999999674997451,
+      "error_rate_at_0_5": 0.000125
+    },
+    "development": {
+      "rows": 120000,
+      "log_loss": 0.04219041149416982,
+      "average_precision": 0.998852042095364,
+      "roc_auc": 0.9987657065277777,
+      "error_rate_at_0_5": 0.014133333333333333
+    },
+    "log_loss_gap": 0.03757773397392096,
+    "average_precision_gap": 0.0011479255845104896
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; calibration, thresholds and the sealed test come in the 4-way step. Training-sample numbers are on files the final model was trained on."
+}

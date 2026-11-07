@@ -1,0 +1,32 @@
+{
+  "version": "pdf-four-way-v1",
+  "script_sha256": "ea3da6aa9fdb2125174d74340566c458e78378792ebc8bba80dc94e91622c371",
+  "manifest_sha256": "f1365801861c06c23aa48c7c0ce66e2aca7548b6afac3fb26a4e79fec0f3ddd6",
+  "dev_manifest_sha256": "f1365801861c06c23aa48c7c0ce66e2aca7548b6afac3fb26a4e79fec0f3ddd6",
+  "audit_sha256": "7a5cd640041cbac5efcbfff92d15f3d9192094105abb58041cb3e2dbbe558840",
+  "models": {
+    "xgb": "d99ec19969f8cede28f489e4d57ad4846fb4dc3586b23a79d611ac9509f5edb4",
+    "lgbm": "7b9bae16d3135086a54a7261678563e50151e8613741f6c28229be317f7933b9",
+    "svm": "7178cfc7dd82b7705f35590a69d518af929ad69e0d3e3e7b49ef20e0f4fd76b4"
+  },
+  "lightgbm": "4.7.0",
+  "xgboost": "3.4.1",
+  "sklearn": "1.6.1",
+  "scipy": "1.16.3",
+  "numpy": "2.4.6",
+  "candidates": {
+    "A": "A XGBoost",
+    "B": "B LightGBM",
+    "C": "C XGBoost + SVM",
+    "D": "D LightGBM + SVM"
+  },
+  "false_alarm_limit": 0.01,
+  "training_sample": {
+    "fraction": 0.25,
+    "seed": 42
+  },
+  "calibration": "Platt (logistic) per model on all development files (weeks 40-51)",
+  "ranking": "Development recall at the <=1% development false-alarm threshold, then development AP",
+  "final_pipeline": "Primary + challenger calibrated probabilities averaged 50/50; threshold on development",
+  "test_policy": "Test files (weeks 52-63) scored only after calibration, thresholds and roles are frozen"
+}

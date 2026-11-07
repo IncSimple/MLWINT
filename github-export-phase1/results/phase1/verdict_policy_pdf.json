@@ -1,0 +1,115 @@
+{
+  "format": "PDF",
+  "key": "pdf",
+  "verdicts": {
+    "malicious": {
+      "rule": "ensemble probability >= threshold",
+      "threshold": 0.7124644389727736,
+      "calibration_false_alarm_target": 0.005,
+      "allowed_clean_files": 10
+    },
+    "suspicious": {
+      "rule": "threshold <= ensemble probability < malicious threshold",
+      "threshold": 0.14083346971177615,
+      "calibration_false_alarm_target": 0.03,
+      "allowed_clean_files": 60
+    },
+    "clean": {
+      "rule": "below the suspicious threshold"
+    }
+  },
+  "ensemble": {
+    "weights": {
+      "xgb": 0.5,
+      "lgbm": 0.5
+    },
+    "calibration": {
+      "xgb": {
+        "slope": 1.2889839326953871,
+        "intercept": 2.0603788810236905
+      },
+      "lgbm": {
+        "slope": 1.2359932390952093,
+        "intercept": 1.9602885070972205
+      }
+    },
+    "formula": "sum over models of weight * sigmoid(slope * raw_margin + intercept)",
+    "raw_margin": {
+      "xgb": "XGBoost inplace_predict(predict_type='margin')",
+      "lgbm": "LightGBM predict(raw_score=True)"
+    }
+  },
+  "models": {
+    "xgb": {
+      "file": "experiments/pdf-fourway-v1/retrain-0-51-v1/XGB_PDF_0-51.ubj",
+      "sha256": "fd72b10984d0e55f3ca27eefbe854a349b5e1400905f3d858bf7f286208eef6c"
+    },
+    "lgbm": {
+      "file": "experiments/pdf-fourway-v1/retrain-0-51-v1/LGBM_PDF_0-51.txt",
+      "sha256": "edc267c0e54a8758b91c1b1b5826930df4800a002847cdbf74c85f4681faaa30"
+    }
+  },
+  "features": "EMBER2024 thrember PEFeatureExtractor, 2,568 values",
+  "calibration_set": {
+    "source": "weeks 48-51 scores of the weeks 0-47 models",
+    "files": 4000,
+    "clean_files": 2000
+  },
+  "test_check": {
+    "format": "PDF",
+    "test_files": 12000,
+    "malware": {
+      "malicious": 0.935,
+      "suspicious": 0.043,
+      "clean_missed": 0.022,
+      "missed_files": 132
+    },
+    "clean_files": {
+      "malicious_false_alarm": 0.016666666666666666,
+      "suspicious": 0.04883333333333333,
+      "clean": 0.9345,
+      "false_alarm_files": 100,
+      "suspicious_files": 293
+    },
+    "flagged_malware": 0.978,
+    "old_1pct_rule": {
+      "recall": 0.9496666666666667,
+      "false_alarm_rate": 0.02666666666666667
+    },
+    "calibration_check": {
+      "malware_malicious": 0.971,
+      "malware_flagged": 0.991,
+      "clean_malicious": 0.005,
+      "clean_suspicious": 0.025
+    },
+    "weekly_missed_malware": {
+      "52": 0.002,
+      "53": 0.008,
+      "54": 0.006,
+      "55": 0.014,
+      "56": 0.024,
+      "57": 0.01,
+      "58": 0.024,
+      "59": 0.04,
+      "60": 0.044,
+      "61": 0.052,
+      "62": 0.018,
+      "63": 0.022
+    },
+    "weekly_malicious_false_alarms": {
+      "52": 0.028,
+      "53": 0.01,
+      "54": 0.014,
+      "55": 0.024,
+      "56": 0.016,
+      "57": 0.014,
+      "58": 0.016,
+      "59": 0.014,
+      "60": 0.012,
+      "61": 0.022,
+      "62": 0.016,
+      "63": 0.014
+    }
+  },
+  "roles_file": "experiments/pdf-fourway-v1/retrain-0-51-v1/roles.json"
+}

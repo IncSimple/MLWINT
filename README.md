@@ -1,238 +1,157 @@
 # MLWINT
-### Machine Learning-Based Malware Intelligence and Detection System
+### Machine Learning-Based Malware Intelligence for Windows
 
-MLWINT explores static malware detection with EMBER 2018 feature vectors,
-LightGBM, XGBoost, and a 50/50 probability ensemble. It provides a NumPy
-predictor, a command-line interface, and a FastAPI inference service.
+MLWINT is a **read-only malware "doctor" for Windows**. It examines a file, tells you in plain language
+whether it is malicious, explains what the file appears to do, and advises you on what to do next.
+It **never deletes, quarantines or modifies anything**. Every decision stays with the user.
 
-**Status:** research prototype. Saved results are exploratory comparisons on
-reused partitions, not a final independent benchmark. Trained models and
-datasets are local artifacts and are intentionally absent from this GitHub copy.
+> **Status:** Phase 1 (detection) is complete for all four Windows file types. Phase 2 (analysis) is
+> being planned. This is a research project; the numbers below come from a public dataset, not from
+> live deployment.
 
-## Motivation and objectives
+---
 
-Static feature classifiers can help prioritize suspicious Windows PE files
-without executing them. This project compares tree-based classifiers, studies
-threshold and regularization tradeoffs, and exposes a consistent feature-array
-inference interface. Its objectives are reproducible comparisons, clear data
-validation, and careful separation of model scores from verified malware labels.
+## Vision
 
-## Capabilities
-
-- Resumable vectorization of precomputed EMBER JSONL features, skipping unlabeled records.
-- Balanced 100,000-row research sample and saved stratified 70/15/15 split indices.
-- LightGBM and XGBoost inference, plus equal-weight probability averaging.
-- Validation of feature dimensions, finite values, and decision thresholds.
-- `.npy` batch inference with optional CSV output.
-- API routes for health, supported model names, and one-vector prediction.
-- Existing evaluation, threshold, latency, and regularization reports.
-
-## Architecture
+Most antivirus tools give you a verdict and act on it without explaining why. MLWINT aims to be the
+opposite: a careful second opinion that shows its reasoning.
 
 ```mermaid
 flowchart LR
-    A[EMBER 2018 JSONL] --> B[Feature v2 vectorizer]
-    B --> C[2381-column NumPy chunks]
-    C --> D[Balanced sample and saved split]
-    D --> E[LightGBM and XGBoost training]
-    E --> F[Local candidate artifacts]
-    F --> G[MalwarePredictor]
-    G --> H[CLI: NPY to CSV]
-    G --> I[FastAPI: single feature vector]
-    D --> J[Evaluation and reports]
-    F --> J
+    F[File] --> D["Phase 1: Detection<br/>malicious / suspicious / clean"]
+    D --> A["Phase 2: Analysis<br/>family, behaviour, MITRE ATT&CK,<br/>threat meter"]
+    A --> I["Phase 3: Intelligence<br/>plain-language explanation<br/>and advice"]
+    I --> U[User decides]
 ```
 
-**Stack:** Python 3.13, NumPy, scikit-learn, LightGBM, XGBoost, FastAPI,
-Pydantic, Uvicorn, pytest; optional EMBER/LIEF, pandas and Matplotlib for research.
-The service accepts extracted features; a raw executable upload/scanning route is not implemented.
+| Phase | Question it answers | Status |
+|---|---|---|
+| **1. Detection** | Is this file malicious? How sure are we? | ✅ Complete |
+| **2. Analysis** | What kind of malware is it, and what can it do? | 📝 Planning |
+| **3. Intelligence** | What does this mean for me, and what should I do? | 🔜 Later |
+
+**Scope:** Windows only. The four file types that matter most on a Windows PC are covered:
+
+| File type | Why it matters |
+|---|---|
+| **Win32** programs (`.exe`/`.dll`, 32-bit) | The classic Windows malware carrier |
+| **Win64** programs (64-bit) | Modern Windows software and malware |
+| **.NET** programs | Large share of modern commodity malware |
+| **PDF** documents | A common way malware is delivered by email |
+
+---
+
+## Phase 1: what has been achieved
+
+### Approach
+- **Data:** the [EMBER2024](https://huggingface.co/datasets/joyce8/EMBER2024) dataset (64 weekly snapshots,
+  late 2023 to late 2024), using the same 2,568 static features (`thrember` feature extractor) for every
+  file type. Files are analysed **without being executed**.
+- **One specialist detector per file type.** For each type, four candidates were compared:
+  XGBoost, LightGBM, XGBoost + linear SVM, and LightGBM + linear SVM. The best two (chosen on development
+  data only) became **primary** and **challenger**, and their **50/50 ensemble** is the shipped detector.
+- **Time-ordered evaluation**, the way a real product meets new malware:
+
+  | Weeks | Use |
+  |---|---|
+  | 0–35 | training |
+  | 36–39 | choosing the number of training rounds / SVM settings |
+  | 40–51 | development: calibration, thresholds, choosing roles |
+  | 52–63 | **test**: scored only after every choice was frozen |
+
+- **Leakage controls:** no file (SHA-256) or identical feature vector is shared between periods; dates are
+  strictly ordered; identical vectors with conflicting labels are removed; an independent audit checks all
+  of this, plus "too good to be true" single features, before any training. Every run is checksummed and
+  resumable.
+
+### Detection results (test weeks 52–63)
+Ensemble at a threshold set for 1% false alarms on development data:
+
+| File type | Test files | Malware caught | False alarms | Test status |
+|---|---|---|---|---|
+| Win64 | 119,990 | **97.71%** | 1.08% | fresh (never seen before) |
+| Win32 | 359,991 | **96.48%** | 0.99% | benchmark (seen once before) |
+| PDF | 12,000 | **94.97%** | 2.67% | benchmark (models retrained on weeks 0–51) |
+| .NET | 59,953 | **94.36%** | 0.89% | fresh |
+
+Key findings:
+- **Gradient-boosted trees won every format.** XGBoost and LightGBM are statistically tied; their ensemble
+  is the most stable. Blending in a linear SVM was tested on every format and **rejected every time**:
+  it fixes some files but breaks more.
+- **Win32/Win64/.NET are stable over time** (development and test agree closely).
+- **PDF malware drifts fast.** Retraining on all weeks 0–51 cut missed malicious PDFs by about a quarter;
+  PDF thresholds still need extra care.
+
+### Final verdict policy (Phase 1 close-out)
+Each file gets one of three verdicts, with thresholds set on calibration data only:
+
+| Verdict | Rule |
+|---|---|
+| 🔴 **MALICIOUS** | score above the level that flags ≤ 0.5% of clean files |
+| 🟠 **SUSPICIOUS** | between that and ≤ 3% of clean files: *get a second opinion* |
+| 🟢 **CLEAN** | below |
+
+| File type | Malware: 🔴 / 🟠 / missed | Clean files wrongly 🔴 | Clean files 🟠 |
+|---|---|---|---|
+| Win64 | 96.0% / 3.1% / **0.9%** | **0.47%** | 2.9% |
+| Win32 | 95.2% / 2.8% / **2.0%** | **0.55%** | 2.3% |
+| .NET | 91.3% / 6.6% / **2.1%** | **0.48%** | 2.0% |
+| PDF | 93.5% / 4.3% / **2.2%** | 1.67% | 4.9% |
+
+Compared with a single 1% threshold, **missed malware roughly halved and false "malicious" verdicts roughly
+halved** for every file type. Files marked *suspicious* are exactly the ones Phase 2 will investigate.
+
+![Phase 1 verdicts](results/phase1/phase1_verdicts.png)
+
+Full tables, per-week results and overfitting checks: [docs/phase1-results.md](docs/phase1-results.md).
+
+---
+
+## What is planned
+
+**Phase 2: Analysis** (next)
+- For every malicious or suspicious file: predict the **malware family**, **behaviour** and
+  **MITRE ATT&CK techniques**, using the family, behaviour, capability (capa) and ATT&CK tags in EMBER2024.
+- A **threat meter** combining the detection score with what the file can do.
+- A suspicious verdict triggers deeper checks, so uncertain files get resolved instead of guessed.
+
+**Phase 3: Intelligence**
+- Plain-language explanations and advice ("what this file does, how risky it is, what you can do").
+- A desktop app (PySide6) with model details one click away and real progress reporting.
+- Still read-only: MLWINT advises, the user decides.
+
+**Known limits.** Static features cannot see everything: packed/encrypted files, brand-new families and
+borderline "grayware" remain hard, and results come from one dataset. An outside reality check on recent
+files from another source is planned.
+
+---
 
 ## Repository layout
 
 ```text
 MLWINT/
-├── README.md, LICENSE, CONTRIBUTING.md, SECURITY.md
-├── pyproject.toml, requirements*.txt
-├── MLWINT_CHAT_HANDOFF.md
-├── configs/                 # documented settings and artifact manifest
-├── data/                    # acquisition and regeneration guide
-├── docs/                    # setup, architecture, experiments and limitations
-├── src/
-│   ├── analysis/            # EDA and provenance inspection scripts
-│   ├── ingestion/           # JSONL inspection and vectorization
-│   ├── detection/           # predictor.py, cli.py, api.py
-│   └── models/              # training/evaluation scripts; candidates stored locally
-├── tests/                   # synthetic unit/API/CLI tests and model integration tests
-├── reports/ember/           # recorded metrics, plots and split indices
-├── scripts/                 # project audits
-├── deployment/              # local service guidance
-└── .github/                 # CI and contribution templates
+├── README.md
+├── docs/
+│   ├── phase1-results.md      full Phase 1 results
+│   ├── methodology.md         data splits, leakage controls, model selection rules
+│   └── roadmap.md             phases 2 and 3 in more detail
+├── pipeline/
+│   ├── pc/                    dataset preparation on a PC (EMBER2024 -> feature shards)
+│   └── colab/                 training and evaluation on Google Colab
+│       ├── win32/  win64/     format-specific runs
+│       ├── generic/           the same pipeline for any format (.NET, PDF)
+│       └── closeout/          the Phase 1 verdict policy
+├── results/                   reports, graphs and detector cards per file type
+└── models/README.md           where to download the trained models
 ```
 
-## Installation
+The trained models are published as a **GitHub Release** (`v1.0-phase1`), not stored in the repository.
+Datasets are not redistributed; the pipeline downloads EMBER2024 from Hugging Face at a pinned revision.
 
-Run commands from this repository root. The original working environment uses
-**Python 3.13.3**; direct dependencies are pinned to versions observed there.
-A fresh installation and Linux compatibility have not yet been verified.
+## Reproducing Phase 1
+See [pipeline/README.md](pipeline/README.md) for the run order. In short: prepare and export one file type
+on a PC, upload the export to Google Drive, then run the Colab steps (leakage audit, XGBoost, LightGBM, SVM,
+four-way comparison) and finally the close-out.
 
-Windows PowerShell:
-
-```powershell
-py -3.13 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
-.\.venv\Scripts\python.exe -m pytest -m "not integration"
-```
-
-Linux/macOS (proposed equivalent):
-
-```bash
-python3.13 -m venv .venv
-.venv/bin/python -m pip install -r requirements-dev.txt
-.venv/bin/python -m pytest -m 'not integration'
-```
-
-The commands below use `python` from the project environment. On PowerShell,
-activate with `. .\.venv\Scripts\Activate.ps1`, or replace `python` with the
-explicit `.venv` executable. No environment variables or secrets are required.
-Paths and hyperparameters are currently defined in Python scripts; see
-[configuration](configs/README.md) and [installation details](docs/installation.md).
-
-## Dataset and feature preparation
-
-Obtain **EMBER 2018, feature version 2** from the
-[official upstream repository](https://github.com/elastic/ember#download).
-Extract its six training JSONL files and `test_features.jsonl` into
-`data/raw/ember2018/`. MLWINT uses 2,381 features, float32 arrays, and labels
-0 (benign) / 1 (malicious); unlabeled -1 rows are skipped.
-
-Upstream licenses its extractor code under AGPLv3 and downloadable data under
-MIT; MLWINT's MIT license does not replace upstream terms. See
-[dataset provenance and checksum](docs/dataset.md) before redistribution.
-
-Install optional extractor dependencies only after reviewing their terms and
-compatibility notes in [installation](docs/installation.md):
-
-```powershell
-python -m pip install -r requirements-research.txt
-python -m src.ingestion.vectorize_ember_chunks --chunk-size 500
-python -m src.models.prepare_dataset
-```
-
-Vectorization resumes from its manifest. Preparation writes `X_sample.npy` and
-`y_sample.npy`, overwriting existing sample arrays. Run regeneration in a
-separate experiment copy if you already have working data. Preserve signed
-hashed features, including negative values. See [feature engineering](docs/feature-engineering.md).
-
-## Training and evaluation
-
-These are existing entry points, provided for documentation; repository setup
-does not run them. **Use a separate experiment copy:** the comparison script
-rewrites split indices and candidate artifacts; other scripts overwrite their
-own reports/artifacts. Keep the original models and split unchanged.
-
-```powershell
-python -m src.models.compare_models
-python -m src.models.train_xgboost
-python -m src.models.evaluate_ensemble
-python -m src.models.reevaluate_regularization
-```
-
-`compare_models` creates the split and LightGBM/forest candidates;
-`train_xgboost` reuses that split. The corrected regularization evaluator also
-requires the saved regularized artifacts. See [training](docs/model-training.md)
-and [evaluation](docs/evaluation.md) for inputs, outputs and caveats.
-
-## CLI inference
-
-Restore the appropriate trusted local artifacts to `src/models/candidates/`
-before prediction. [Artifact manifest](configs/artifacts.json) records the
-inspected model hashes; [artifact instructions](docs/artifacts.md) explain restoration.
-
-```powershell
-python -m src.detection.cli --model lightgbm --input data/processed/ember/model_data/X_sample.npy
-python -m src.detection.cli --model ensemble --input data/processed/ember/model_data/X_sample.npy --threshold 0.5 --output reports/ember/model_comparison/cli_predictions.csv
-```
-
-Input is one 2,381-value vector or an `(n, 2381)` `.npy` array. Output contains
-malicious-class probabilities and labels at the requested threshold. Scores
-are model estimates, not independently verified file verdicts.
-
-## FastAPI service
-
-```powershell
-python -m uvicorn src.detection.api:app --host 127.0.0.1 --port 8000
-```
-
-- `GET /health`: process health; does not load or verify model artifacts.
-- `GET /models`: supported names; does not confirm their files are present.
-- `POST /predict`: one feature vector, optional model and threshold.
-- OpenAPI interface: `http://127.0.0.1:8000/docs`.
-
-In another PowerShell window:
-
-```powershell
-Invoke-RestMethod http://127.0.0.1:8000/health
-$body = @{ model = 'lightgbm'; features = @(0.0) * 2381; threshold = 0.5 } | ConvertTo-Json -Depth 3
-Invoke-RestMethod http://127.0.0.1:8000/predict -Method Post -ContentType 'application/json' -Body $body
-```
-
-The zero vector is a transport smoke test, not a representative PE sample.
-Missing models produce HTTP 503; invalid requests produce HTTP 422. See
-[API reference](docs/inference-api.md) and [deployment notes](deployment/README.md).
-
-## Recorded comparison
-
-Validation: 15,000 rows from the balanced 100,000-row sample. F1 threshold: 0.5.
-Values below are copied from the existing
-[ensemble validation report](reports/ember/model_comparison/ensemble_validation_comparison.json),
-not recomputed during repository preparation.
-
-| Candidate | ROC-AUC | PR-AUC (average precision) | F1 |
-|---|---:|---:|---:|
-| LightGBM baseline | 0.995208 | 0.995536 | 0.967789 |
-| XGBoost baseline | 0.995579 | 0.995812 | 0.967081 |
-| 50/50 ensemble | 0.995611 | 0.995875 | 0.967759 |
-
-Validation has been reused for early stopping, tuning and selection. Test
-metrics have also been explored. Define a new independent evaluation protocol
-before making final performance claims. Stronger regularization reduced the
-recorded validation scores; see [experiment notes](docs/experiments.md).
-
-## Tests and CI
-
-```powershell
-python -m pytest -m "not integration"
-# With trusted local candidate models restored:
-python -m pytest -m integration
-```
-
-CI targets Python 3.13 and runs synthetic inference, CLI and ASGI API tests
-without datasets, model downloads or training. Existing artifact-backed tests
-skip when models are absent. See [test guide](tests/README.md).
-
-## Limitations and next steps
-
-EMBER 2018 is historical static PE data. Generalization to current malware,
-drift, calibration, adversarial robustness and operational thresholds remain
-to be independently evaluated. Identical feature vectors do not establish
-same-file or family leakage. Sample preparation currently omits source hash
-mappings. A clean final evaluation set, provenance tracking, and deployment
-authentication are future work. See [limitations](docs/limitations.md).
-
-## Responsible use, license and citation
-
-Use only for authorized defensive research. Do not execute unknown samples
-on a normal workstation. This repository distributes source and lightweight
-reports; no malware executables, raw dataset or trained artifacts are included.
-See [SECURITY.md](SECURITY.md).
-
-Existing project code is licensed under [MIT](LICENSE), copyright 2026 Kalmit
-Kulkarni. Third-party dependencies and datasets retain their own licenses.
-When using EMBER, cite Anderson and Roth, *EMBER: An Open Dataset for Training
-Static PE Malware Machine Learning Models* (2018),
-[arXiv:1804.04637](https://arxiv.org/abs/1804.04637), and identify the 2018/v2
-dataset separately; the original paper describes EMBER 2017. No MLWINT DOI or
-published paper has been verified.
-
-See [GitHub publication guide](docs/github-publication.md) for the offline
-GitHub Desktop workflow and the review checklist before a first commit/push.
+## License
+MIT. See [LICENSE](LICENSE). EMBER2024 data and the `thrember` extractor are subject to their own licenses.

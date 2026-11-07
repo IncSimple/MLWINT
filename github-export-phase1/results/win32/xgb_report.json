@@ -1,0 +1,30 @@
+{
+  "status": "WIN32_XGB_EXTENDED",
+  "model_file": "XGB_WIN32_extended.ubj",
+  "model_sha256": "8ba3eab7d0ce57f77a3f035dbd3e0e0af424d475b924f4253e163b1b33d142a3",
+  "selected_rounds": 5529,
+  "evaluated_rounds": 5620,
+  "stopped_by": "patience",
+  "inner_stop_logloss": {
+    "at_2000": 0.0560437129561385,
+    "best": 0.04694175075826833
+  },
+  "overfitting_gap": {
+    "at_2000": 0.026251154352431978,
+    "at_selected": 0.04020864371434436
+  },
+  "development_old_vs_new": {
+    "old_2000": {
+      "log_loss": 0.063282575672704,
+      "average_precision": 0.9977253386202162,
+      "roc_auc": 0.9975013393046532
+    },
+    "new_5529": {
+      "log_loss": 0.05763688614091687,
+      "average_precision": 0.9982494535898927,
+      "roc_auc": 0.9980855590737615
+    }
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; thresholds, calibration and test come in the 4-way step."
+}

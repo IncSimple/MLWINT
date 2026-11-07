@@ -1,0 +1,84 @@
+{
+  "status": "PHASE1_CLOSEOUT_COMPLETE",
+  "policy": {
+    "malicious_calibration_false_alarm_target": 0.005,
+    "suspicious_calibration_false_alarm_target": 0.03
+  },
+  "formats": [
+    {
+      "format": "Win32",
+      "test_files": 359991,
+      "malware_malicious": 0.9521777777777778,
+      "malware_suspicious": 0.027811111111111113,
+      "malware_missed": 0.02001111111111111,
+      "malware_missed_files": 3602,
+      "clean_false_alarm": 0.005533610013834025,
+      "clean_false_alarm_files": 996,
+      "clean_suspicious": 0.02320671589135012,
+      "clean_suspicious_files": 4177,
+      "old_rule_recall": 0.9648277777777777,
+      "old_rule_false_alarms": 0.00994494169152902
+    },
+    {
+      "format": "Win64",
+      "test_files": 119990,
+      "malware_malicious": 0.9601833333333334,
+      "malware_suspicious": 0.03125,
+      "malware_missed": 0.008566666666666667,
+      "malware_missed_files": 514,
+      "clean_false_alarm": 0.004700783463910652,
+      "clean_false_alarm_files": 282,
+      "clean_suspicious": 0.028938156359393234,
+      "clean_suspicious_files": 1736,
+      "old_rule_recall": 0.9771333333333333,
+      "old_rule_false_alarms": 0.010801800300050008
+    },
+    {
+      "format": ".NET",
+      "test_files": 59953,
+      "malware_malicious": 0.9132,
+      "malware_suspicious": 0.06573333333333334,
+      "malware_missed": 0.021066666666666668,
+      "malware_missed_files": 632,
+      "clean_false_alarm": 0.004774146162320969,
+      "clean_false_alarm_files": 143,
+      "clean_suspicious": 0.019997996861750075,
+      "clean_suspicious_files": 599,
+      "old_rule_recall": 0.9436,
+      "old_rule_false_alarms": 0.008913965212165727
+    },
+    {
+      "format": "PDF",
+      "test_files": 12000,
+      "malware_malicious": 0.935,
+      "malware_suspicious": 0.043,
+      "malware_missed": 0.022,
+      "malware_missed_files": 132,
+      "clean_false_alarm": 0.016666666666666666,
+      "clean_false_alarm_files": 100,
+      "clean_suspicious": 0.04883333333333333,
+      "clean_suspicious_files": 293,
+      "old_rule_recall": 0.9496666666666667,
+      "old_rule_false_alarms": 0.02666666666666667
+    }
+  ],
+  "detector_cards": {
+    "win32": {
+      "file": "experiments/phase1-closeout-v1/verdict_policy_win32.json",
+      "sha256": "f14dadb17d83757556af75df067a1ffadd0cb193ba7780c366165b83dcdacf1b"
+    },
+    "win64": {
+      "file": "experiments/phase1-closeout-v1/verdict_policy_win64.json",
+      "sha256": "0ab71157b98ecb0ca989fe6670230e8abbbe7f0564964a08c3ebfdb331a450e8"
+    },
+    "dotnet": {
+      "file": "experiments/phase1-closeout-v1/verdict_policy_dotnet.json",
+      "sha256": "518e1039fafb9bf3d8590619d4e683be56460854c04c15edf61e9173e3353459"
+    },
+    "pdf": {
+      "file": "experiments/phase1-closeout-v1/verdict_policy_pdf.json",
+      "sha256": "6bdb8000e50449acac93dc5b3e8ee3e1a134eddbc2ef86fa5cd524a87e9c2ee6"
+    }
+  },
+  "note": "Thresholds come from calibration data only. Win32 and PDF tests had been viewed before (benchmarks); Win64 and .NET tests are fresh. The cut-off table is information only."
+}

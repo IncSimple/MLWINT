@@ -1,0 +1,33 @@
+{
+  "status": "PDF_XGB_TRAINED",
+  "model_file": "XGB_PDF.ubj",
+  "model_sha256": "d99ec19969f8cede28f489e4d57ad4846fb4dc3586b23a79d611ac9509f5edb4",
+  "selected_rounds": 213,
+  "evaluated_rounds": 313,
+  "stopped_by": "patience",
+  "selector": {
+    "inner_fit_logloss": 0.01726278764585226,
+    "inner_stop_logloss": 0.06783775659507228,
+    "gap": 0.05057496894922002
+  },
+  "final_model": {
+    "training_sample": {
+      "rows": 40000,
+      "log_loss": 0.018132108515549254,
+      "average_precision": 0.9999043436197823,
+      "roc_auc": 0.999896655,
+      "error_rate_at_0_5": 0.0033
+    },
+    "development": {
+      "rows": 12000,
+      "log_loss": 0.058346398449966634,
+      "average_precision": 0.9983248352094584,
+      "roc_auc": 0.9978540555555554,
+      "error_rate_at_0_5": 0.02
+    },
+    "log_loss_gap": 0.04021428993441738,
+    "average_precision_gap": 0.0015795084103239487
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; calibration, thresholds and the sealed test come in the 4-way step. Training-sample numbers are on files the final model was trained on."
+}

@@ -1,0 +1,33 @@
+{
+  "status": "WIN64_XGB_TRAINED",
+  "model_file": "XGB_WIN64.ubj",
+  "model_sha256": "a2bf85e651eacebe203dfcceea3c7a8c00df608078b7481d8c93439aab64f250",
+  "selected_rounds": 2028,
+  "evaluated_rounds": 2119,
+  "stopped_by": "patience",
+  "selector": {
+    "inner_fit_logloss": 0.00451970984163132,
+    "inner_stop_logloss": 0.03687350978639536,
+    "gap": 0.03235379994476403
+  },
+  "final_model": {
+    "training_sample": {
+      "rows": 40000,
+      "log_loss": 0.00528566123329839,
+      "average_precision": 0.999999402079199,
+      "roc_auc": 0.9999993974952763,
+      "error_rate_at_0_5": 0.00035
+    },
+    "development": {
+      "rows": 120000,
+      "log_loss": 0.04242539218648667,
+      "average_precision": 0.9988304235982589,
+      "roc_auc": 0.9987316481944445,
+      "error_rate_at_0_5": 0.014416666666666666
+    },
+    "log_loss_gap": 0.03713973095318828,
+    "average_precision_gap": 0.0011689784809401083
+  },
+  "test_used": false,
+  "note": "Development numbers are a sanity check; calibration, thresholds and the sealed test come in the 4-way step. Training-sample numbers are on files the final model was trained on."
+}

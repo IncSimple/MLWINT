@@ -1,0 +1,366 @@
+{
+  "status": "PDF_FOUR_WAY_COMPLETE",
+  "primary": "B LightGBM",
+  "challenger": "A XGBoost",
+  "ensemble_effective_weights": {
+    "lgbm": 0.5,
+    "xgb": 0.5
+  },
+  "development_rows": 12000,
+  "test_rows": 12000,
+  "development_ranking": [
+    {
+      "key": "B",
+      "candidate": "B LightGBM",
+      "development_recall": 0.98,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9984156859484675
+    },
+    {
+      "key": "A",
+      "candidate": "A XGBoost",
+      "development_recall": 0.979,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9983248352094584
+    },
+    {
+      "key": "D",
+      "candidate": "D LightGBM + SVM",
+      "development_recall": 0.9753333333333334,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9977507073240082
+    },
+    {
+      "key": "C",
+      "candidate": "C XGBoost + SVM",
+      "development_recall": 0.9748333333333333,
+      "development_false_alarm_rate": 0.01,
+      "development_ap": 0.9978586304142797
+    }
+  ],
+  "test": [
+    {
+      "model": "A XGBoost",
+      "recall": 0.9333333333333333,
+      "false_alarm_rate": 0.019833333333333335,
+      "fp": 119,
+      "fn": 400,
+      "average_precision": 0.9919688989948001,
+      "roc_auc": 0.9897380833333334,
+      "log_loss": 0.12237043496621179,
+      "development_false_alarm_rate": 0.01
+    },
+    {
+      "model": "B LightGBM",
+      "recall": 0.9323333333333333,
+      "false_alarm_rate": 0.021333333333333333,
+      "fp": 128,
+      "fn": 406,
+      "average_precision": 0.9914985106608651,
+      "roc_auc": 0.9894206944444445,
+      "log_loss": 0.1283898713076078,
+      "development_false_alarm_rate": 0.01
+    },
+    {
+      "model": "C XGBoost + SVM",
+      "recall": 0.9406666666666667,
+      "false_alarm_rate": 0.0205,
+      "fp": 123,
+      "fn": 356,
+      "average_precision": 0.9905261652427707,
+      "roc_auc": 0.9881209166666667,
+      "log_loss": 0.1306313344029836,
+      "development_false_alarm_rate": 0.01
+    },
+    {
+      "model": "D LightGBM + SVM",
+      "recall": 0.9415,
+      "false_alarm_rate": 0.0215,
+      "fp": 129,
+      "fn": 351,
+      "average_precision": 0.9901041513426824,
+      "roc_auc": 0.9876683055555555,
+      "log_loss": 0.1333391490465365,
+      "development_false_alarm_rate": 0.01
+    },
+    {
+      "model": "Final ensemble (B LightGBM + A XGBoost)",
+      "recall": 0.9321666666666667,
+      "false_alarm_rate": 0.021333333333333333,
+      "fp": 128,
+      "fn": 407,
+      "average_precision": 0.991955384409607,
+      "roc_auc": 0.9898601666666667,
+      "log_loss": 0.12257291717160503,
+      "development_false_alarm_rate": 0.01
+    },
+    {
+      "model": "SVM alone (reference)",
+      "recall": 0.8965,
+      "false_alarm_rate": 0.018166666666666668,
+      "fp": 109,
+      "fn": 621,
+      "average_precision": 0.9807474103535255,
+      "roc_auc": 0.9760536944444443,
+      "log_loss": 0.20147374234588475,
+      "development_false_alarm_rate": 0.01
+    }
+  ],
+  "worst_test_week": {
+    "A": 54,
+    "B": 54,
+    "C": 61,
+    "D": 61,
+    "ENS": 54
+  },
+  "weekly_recall_range": {
+    "A XGBoost": [
+      0.898,
+      0.988
+    ],
+    "B LightGBM": [
+      0.876,
+      0.988
+    ],
+    "C XGB+SVM": [
+      0.896,
+      0.982
+    ],
+    "D LGBM+SVM": [
+      0.902,
+      0.98
+    ],
+    "Final ensemble": [
+      0.884,
+      0.986
+    ]
+  },
+  "overfitting_gap": [
+    {
+      "model": "A XGBoost",
+      "split": "training sample",
+      "rows": 9941,
+      "log_loss": 0.018778369620288258,
+      "average_precision": 0.9998705749890127,
+      "roc_auc": 0.9998588560254553,
+      "recall": 0.9971971971971972,
+      "false_alarm_rate": 0.00646987464617873
+    },
+    {
+      "model": "A XGBoost",
+      "split": "development",
+      "rows": 12000,
+      "log_loss": 0.04560377473873342,
+      "average_precision": 0.9983248352094584,
+      "roc_auc": 0.9978540555555554,
+      "recall": 0.979,
+      "false_alarm_rate": 0.01
+    },
+    {
+      "model": "A XGBoost",
+      "split": "test",
+      "rows": 12000,
+      "log_loss": 0.12237043496621179,
+      "average_precision": 0.9919688989948001,
+      "roc_auc": 0.9897380833333334,
+      "recall": 0.9333333333333333,
+      "false_alarm_rate": 0.019833333333333335
+    },
+    {
+      "model": "B LightGBM",
+      "split": "training sample",
+      "rows": 9941,
+      "log_loss": 0.020749773580516568,
+      "average_precision": 0.9999392303637168,
+      "roc_auc": 0.9999379484620082,
+      "recall": 0.9987987987987988,
+      "false_alarm_rate": 0.01253538212697129
+    },
+    {
+      "model": "B LightGBM",
+      "split": "development",
+      "rows": 12000,
+      "log_loss": 0.04589226219569633,
+      "average_precision": 0.9984156859484675,
+      "roc_auc": 0.9980471388888889,
+      "recall": 0.98,
+      "false_alarm_rate": 0.01
+    },
+    {
+      "model": "B LightGBM",
+      "split": "test",
+      "rows": 12000,
+      "log_loss": 0.1283898713076078,
+      "average_precision": 0.9914985106608651,
+      "roc_auc": 0.9894206944444445,
+      "recall": 0.9323333333333333,
+      "false_alarm_rate": 0.021333333333333333
+    },
+    {
+      "model": "C XGB+SVM",
+      "split": "training sample",
+      "rows": 9941,
+      "log_loss": 0.045079852559016496,
+      "average_precision": 0.9993165317202195,
+      "roc_auc": 0.9992531957756382,
+      "recall": 0.9903903903903903,
+      "false_alarm_rate": 0.014759401536595228
+    },
+    {
+      "model": "C XGB+SVM",
+      "split": "development",
+      "rows": 12000,
+      "log_loss": 0.060246697524847966,
+      "average_precision": 0.9978586304142797,
+      "roc_auc": 0.9973435555555556,
+      "recall": 0.9748333333333333,
+      "false_alarm_rate": 0.01
+    },
+    {
+      "model": "C XGB+SVM",
+      "split": "test",
+      "rows": 12000,
+      "log_loss": 0.1306313344029836,
+      "average_precision": 0.9905261652427707,
+      "roc_auc": 0.9881209166666667,
+      "recall": 0.9406666666666667,
+      "false_alarm_rate": 0.0205
+    },
+    {
+      "model": "D LGBM+SVM",
+      "split": "training sample",
+      "rows": 9941,
+      "log_loss": 0.04584738741735788,
+      "average_precision": 0.9994234901073746,
+      "roc_auc": 0.9994137283259806,
+      "recall": 0.990990990990991,
+      "false_alarm_rate": 0.01597250303275374
+    },
+    {
+      "model": "D LGBM+SVM",
+      "split": "development",
+      "rows": 12000,
+      "log_loss": 0.06092440704077674,
+      "average_precision": 0.9977507073240082,
+      "roc_auc": 0.9972136944444445,
+      "recall": 0.9753333333333334,
+      "false_alarm_rate": 0.01
+    },
+    {
+      "model": "D LGBM+SVM",
+      "split": "test",
+      "rows": 12000,
+      "log_loss": 0.1333391490465365,
+      "average_precision": 0.9901041513426824,
+      "roc_auc": 0.9876683055555555,
+      "recall": 0.9415,
+      "false_alarm_rate": 0.0215
+    },
+    {
+      "model": "Final ensemble",
+      "split": "training sample",
+      "rows": 9941,
+      "log_loss": 0.019116014390214733,
+      "average_precision": 0.9999350194914852,
+      "roc_auc": 0.9999333745391166,
+      "recall": 0.9977977977977978,
+      "false_alarm_rate": 0.00950262838657501
+    },
+    {
+      "model": "Final ensemble",
+      "split": "development",
+      "rows": 12000,
+      "log_loss": 0.04489340984321933,
+      "average_precision": 0.9984262208455694,
+      "roc_auc": 0.9980216666666667,
+      "recall": 0.9805,
+      "false_alarm_rate": 0.01
+    },
+    {
+      "model": "Final ensemble",
+      "split": "test",
+      "rows": 12000,
+      "log_loss": 0.12257291717160503,
+      "average_precision": 0.991955384409607,
+      "roc_auc": 0.9898601666666667,
+      "recall": 0.9321666666666667,
+      "false_alarm_rate": 0.021333333333333333
+    },
+    {
+      "model": "SVM alone",
+      "split": "training sample",
+      "rows": 9941,
+      "log_loss": 0.10454085145683921,
+      "average_precision": 0.9930561691000565,
+      "roc_auc": 0.9924387387792161,
+      "recall": 0.9569569569569569,
+      "false_alarm_rate": 0.01940962393853619
+    },
+    {
+      "model": "SVM alone",
+      "split": "development",
+      "rows": 12000,
+      "log_loss": 0.11109199831404086,
+      "average_precision": 0.9926201202802842,
+      "roc_auc": 0.9901890416666667,
+      "recall": 0.9375,
+      "false_alarm_rate": 0.01
+    },
+    {
+      "model": "SVM alone",
+      "split": "test",
+      "rows": 12000,
+      "log_loss": 0.20147374234588475,
+      "average_precision": 0.9807474103535255,
+      "roc_auc": 0.9760536944444443,
+      "recall": 0.8965,
+      "false_alarm_rate": 0.018166666666666668
+    }
+  ],
+  "paired_errors": {
+    "files_wrong_for_both_A_and_B": 481,
+    "of_those_svm_alone_right": 174,
+    "of_those_ensemble_right": 0,
+    "B_vs_A": {
+      "fixes": 38,
+      "adds": 53
+    },
+    "ENS_vs_primary": {
+      "fixes": 27,
+      "adds": 28
+    },
+    "C_vs_A": {
+      "fixes": 130,
+      "adds": 90
+    },
+    "D_vs_B": {
+      "fixes": 149,
+      "adds": 95
+    }
+  },
+  "separation": {
+    "dev_train_sha": 0,
+    "dev_train_vector": 0,
+    "dev_test_sha": 0,
+    "dev_test_vector": 0,
+    "dev_duplicate_sha": 0,
+    "dev_weeks": [
+      40,
+      51
+    ]
+  },
+  "scope": "Temporal: train weeks 0-39, development 40-51, test 52-63; exact SHA/vector separation; family/near-duplicate separation not established; the test files were sealed until this run (first and only scoring: a genuinely fresh test)",
+  "artifacts": {
+    "protocol.json": "36180d0067efd7bc171c6b2441dd7a5c4d7c5f15941a6b529d250e56874313e8",
+    "roles.json": "c7bf1006773a39f5f484b28d30c40612a3a4266a28c0f9f3724d652bdd31e5e7",
+    "test_comparison.csv": "6a3fb3c7a88a1c0420da453a65815cbe60d766ae4c2c9a6bc423290d147d74e2",
+    "development_ranking.csv": "17a45d91c58529dd1368acbf5557a0442809847d97e9bc6e00b11848284c785a",
+    "test_weekly.csv": "abdf08967f33da4c9f63be560f99a8c8d4b444cdc02c12b5e4135b9b7c498129",
+    "overfitting_gap.csv": "90734d219614a116b3978b2da80b6bc93637918d176ad857c8d05b55688e7128",
+    "test_predictions.npz": "29c9ba18d27fb6b1670913e232d4f906bd96246137ed899ac3ea9cffe701440f",
+    "pdf_four_way.png": "7efeae3fa04c948e4fd9f2cc4474a1b7bb4b75fe4f2cef4fed8b6dd219a22378",
+    "pdf_four_way.pdf": "7729ed39d4a042a95beec75ecdaaf98c99f87cd4a6c772853251c589469eb405",
+    "pdf_overfitting_gap.png": "faf64e9eae3965ea605633914e3edfed772f6c53b8ee1e5eedcbf9de86d57e79",
+    "pdf_overfitting_gap.pdf": "36892724bfc644b3ab1475053211266868ac4292f137206929a115f28c1e3689"
+  }
+}

@@ -1,0 +1,5 @@
+key,candidate,development_recall,development_false_alarm_rate,development_ap
+A,A XGBoost,0.9451,0.01,0.9974340385967562
+B,B LightGBM,0.9425,0.01,0.9972763237305539
+C,C XGBoost + SVM,0.9124,0.01,0.9956520644201962
+D,D LightGBM + SVM,0.9071666666666667,0.01,0.9955408072743215

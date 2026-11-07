@@ -1,0 +1,89 @@
+{
+  "primary": "A",
+  "challenger": "B",
+  "primary_name": "A XGBoost",
+  "challenger_name": "B LightGBM",
+  "ensemble_effective_weights": {
+    "xgb": 0.5,
+    "lgbm": 0.5
+  },
+  "calibration": {
+    "xgb": {
+      "slope": 1.2889839326953871,
+      "intercept": 2.0603788810236905
+    },
+    "lgbm": {
+      "slope": 1.2359932390952093,
+      "intercept": 1.9602885070972205
+    },
+    "svm": {
+      "slope": 1.1716332521990214,
+      "intercept": 1.0680814380903951
+    }
+  },
+  "thresholds": {
+    "A": {
+      "threshold": 0.48600782214923544,
+      "benign_rows": 2000,
+      "allowed_false_positives": 20,
+      "actual_fpr": 0.01
+    },
+    "B": {
+      "threshold": 0.5172809708383672,
+      "benign_rows": 2000,
+      "allowed_false_positives": 20,
+      "actual_fpr": 0.01
+    },
+    "C": {
+      "threshold": 0.4902681208596284,
+      "benign_rows": 2000,
+      "allowed_false_positives": 20,
+      "actual_fpr": 0.01
+    },
+    "D": {
+      "threshold": 0.514478482153177,
+      "benign_rows": 2000,
+      "allowed_false_positives": 20,
+      "actual_fpr": 0.01
+    },
+    "ENS": {
+      "threshold": 0.5003563648580123,
+      "benign_rows": 2000,
+      "allowed_false_positives": 20,
+      "actual_fpr": 0.01
+    }
+  },
+  "ranking": [
+    {
+      "key": "A",
+      "candidate": "A XGBoost",
+      "recall": 0.977,
+      "false_alarm_rate": 0.01,
+      "ap": 0.9981309931617188
+    },
+    {
+      "key": "B",
+      "candidate": "B LightGBM",
+      "recall": 0.975,
+      "false_alarm_rate": 0.01,
+      "ap": 0.998193520862608
+    },
+    {
+      "key": "C",
+      "candidate": "C XGBoost + SVM",
+      "recall": 0.9685,
+      "false_alarm_rate": 0.01,
+      "ap": 0.9974787564809262
+    },
+    {
+      "key": "D",
+      "candidate": "D LightGBM + SVM",
+      "recall": 0.9645,
+      "false_alarm_rate": 0.01,
+      "ap": 0.9974421808954929
+    }
+  ],
+  "rows": 4000,
+  "benign_rows": 2000,
+  "rule": "Chosen on weeks 48-51 scores of the weeks 0-47 models, before the test is scored"
+}

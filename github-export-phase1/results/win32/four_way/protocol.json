@@ -1,0 +1,36 @@
+{
+  "version": "win32-four-way-full-dev-v1",
+  "script_sha256": "987a65d6435fe85d73243531bf957442550f9e0d8158978c7cc321a5b6504dda",
+  "manifest_sha256": "10e61402594a1619ad1121344934520330dabd6a5d511a52df7d969027c39ca3",
+  "dev_manifest_sha256": "ebed2ece7889d46851843d6e6c3f182cabb4566d0cacec38915b880222ca3d5e",
+  "audit_sha256": "82ea7abda22f8f459e5f4afb21a9f6ed431f249d098fc380240a08146fe23a93",
+  "models": {
+    "xgb": "8ba3eab7d0ce57f77a3f035dbd3e0e0af424d475b924f4253e163b1b33d142a3",
+    "lgbm": "7c7c37ff4b767d6409cd02bb5eefaeb5e035a58fcb985dd4593a0ff858962199",
+    "svm": "a6b14c3e86cefd6aa11898b624fdb6af38f06c3a1a0385647802ee5322f455dc"
+  },
+  "old_models": {
+    "xgboost.ubj": "d067841d7fbdabeb51c05b59ab1e49fbbcdc67c1888cb8c8facd7c7515a859be",
+    "lightgbm.txt": "ef94d30817a401ecd5e09d97d5b5d5201a0b510f283de9dbb72bfed1d9a3e60c"
+  },
+  "lightgbm": "4.7.0",
+  "xgboost": "3.4.1",
+  "sklearn": "1.6.1",
+  "scipy": "1.16.3",
+  "numpy": "2.4.6",
+  "candidates": {
+    "A": "A XGBoost",
+    "B": "B LightGBM",
+    "C": "C XGBoost + SVM",
+    "D": "D LightGBM + SVM"
+  },
+  "false_alarm_limit": 0.01,
+  "training_sample": {
+    "fraction": 0.1,
+    "seed": 42
+  },
+  "calibration": "Platt (logistic) per model on all development files (weeks 40-51)",
+  "ranking": "Development recall at the <=1% development false-alarm threshold, then development AP",
+  "final_pipeline": "Primary + challenger calibrated probabilities averaged 50/50; threshold on development",
+  "test_policy": "Test files (weeks 52-63) scored only after calibration, thresholds and roles are frozen"
+}

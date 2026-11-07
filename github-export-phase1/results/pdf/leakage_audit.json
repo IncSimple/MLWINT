@@ -1,0 +1,157 @@
+{
+  "created_utc": "2026-11-07T13:28:42.027349+00:00",
+  "manifest_sha256": "f1365801861c06c23aa48c7c0ce66e2aca7548b6afac3fb26a4e79fec0f3ddd6",
+  "checks": {
+    "counts": {
+      "inner_fit": {
+        "rows": 36000,
+        "malicious": 18000
+      },
+      "inner_stop": {
+        "rows": 4000,
+        "malicious": 2000
+      },
+      "development": {
+        "rows": 12000,
+        "malicious": 6000
+      },
+      "test": {
+        "rows": 12000,
+        "labels": "sealed"
+      }
+    },
+    "same_file_sha256": {
+      "across_partitions": {
+        "inner_fit~inner_stop": 0,
+        "inner_fit~development": 0,
+        "inner_fit~test": 0,
+        "inner_stop~development": 0,
+        "inner_stop~test": 0,
+        "development~test": 0
+      },
+      "repeated_within_partition": {
+        "inner_fit": 0,
+        "inner_stop": 0,
+        "development": 0,
+        "test": 0
+      }
+    },
+    "same_feature_vector": {
+      "across_partitions": {
+        "inner_fit~inner_stop": 0,
+        "inner_fit~development": 0,
+        "inner_fit~test": 0,
+        "inner_stop~development": 0,
+        "inner_stop~test": 0,
+        "development~test": 0
+      },
+      "repeated_within_partition": {
+        "inner_fit": 0,
+        "inner_stop": 0,
+        "development": 0,
+        "test": 0
+      }
+    },
+    "identical_vectors_with_different_labels": 0,
+    "time_span": {
+      "inner_fit": {
+        "first_week": 0,
+        "last_week": 35,
+        "first_time": 1695515381,
+        "last_time": 1717286308
+      },
+      "inner_stop": {
+        "first_week": 36,
+        "last_week": 39,
+        "first_time": 1717291237,
+        "last_time": 1719704581
+      },
+      "development": {
+        "first_week": 40,
+        "last_week": 51,
+        "first_time": 1719705881,
+        "last_time": 1726962317
+      },
+      "test": {
+        "first_week": 52,
+        "last_week": 63,
+        "first_time": 1726963967,
+        "last_time": 1734220443
+      }
+    },
+    "single_feature_auc": {
+      "sample_rows": 40000,
+      "flag_at": 0.99,
+      "strongest": [
+        {
+          "feature": 622,
+          "auc": 0.90358304875
+        },
+        {
+          "feature": 602,
+          "auc": 0.87575221625
+        },
+        {
+          "feature": 590,
+          "auc": 0.85538217375
+        },
+        {
+          "feature": 665,
+          "auc": 0.84317423875
+        },
+        {
+          "feature": 589,
+          "auc": 0.831029655
+        },
+        {
+          "feature": 559,
+          "auc": 0.17660397125
+        },
+        {
+          "feature": 600,
+          "auc": 0.8104021175
+        },
+        {
+          "feature": 595,
+          "auc": 0.80872871875
+        },
+        {
+          "feature": 128,
+          "auc": 0.80359049125
+        },
+        {
+          "feature": 67,
+          "auc": 0.8009016575
+        },
+        {
+          "feature": 601,
+          "auc": 0.80004740125
+        },
+        {
+          "feature": 69,
+          "auc": 0.79436533875
+        },
+        {
+          "feature": 537,
+          "auc": 0.793455665
+        },
+        {
+          "feature": 118,
+          "auc": 0.78559406125
+        },
+        {
+          "feature": 692,
+          "auc": 0.7850119675
+        }
+      ],
+      "flagged": []
+    }
+  },
+  "problems": [],
+  "status": "PDF_SEPARATION_PASSED",
+  "not_covered": [
+    "near-duplicate or repacked files",
+    "malware-family overlap across partitions",
+    "label noise in the source dataset"
+  ]
+}
