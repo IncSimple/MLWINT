@@ -1,0 +1,2298 @@
+{
+ "note": "Sample data for the MLWINT live demo: every file, path, hash, host and fact is invented.",
+ "versions": {
+  "app": "1.0.0",
+  "models": "2026.11.1"
+ },
+ "history": [
+  {
+   "file": "analysis-20261113-214500.json",
+   "started": "2026-11-13 21:45:00",
+   "where": "C:\\Users\\demo\\Downloads",
+   "paths": [
+    "c:\\users\\demo\\downloads"
+   ],
+   "whole_pc": false,
+   "files": 10,
+   "levels": {
+    "SEVERE": 1,
+    "HIGH": 1,
+    "ELEVATED": 1,
+    "GUARDED": 2,
+    "LOW": 4
+   },
+   "not_checked": 1,
+   "memory": "Memory: 2 unchanged (earlier result used), 8 checked now",
+   "seconds": 141
+  },
+  {
+   "file": "analysis-20261112-091200.json",
+   "started": "2026-11-12 09:12:00",
+   "where": "Whole PC",
+   "paths": [],
+   "whole_pc": true,
+   "files": 1320,
+   "levels": {
+    "LOW": 1311,
+    "GUARDED": 8,
+    "ELEVATED": 1
+   },
+   "not_checked": 0,
+   "memory": "",
+   "seconds": 5160
+  },
+  {
+   "file": "analysis-20261110-183000.json",
+   "started": "2026-11-10 18:30:00",
+   "where": "C:\\Users\\demo\\Downloads",
+   "paths": [
+    "c:\\users\\demo\\downloads"
+   ],
+   "whole_pc": false,
+   "files": 8,
+   "levels": {
+    "GUARDED": 3,
+    "LOW": 5
+   },
+   "not_checked": 0,
+   "memory": "",
+   "seconds": 96
+  },
+  {
+   "file": "analysis-20261105-120000.json",
+   "started": "2026-11-05 12:00:00",
+   "where": "C:\\Users\\demo\\Documents\\Work",
+   "paths": [
+    "c:\\users\\demo\\documents\\work"
+   ],
+   "whole_pc": false,
+   "files": 4,
+   "levels": {
+    "LOW": 4
+   },
+   "not_checked": 0,
+   "memory": "",
+   "seconds": 18
+  }
+ ],
+ "reports": {
+  "analysis-20261113-214500.json": [
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\PhotoEditor_Pro_crack.exe",
+    "sha256": "63a256623bae2c4568b554e1b82511f69a7cf5e0a5a588987e8e34c087039ae1",
+    "format": "Win32",
+    "verdict": "MALICIOUS",
+    "probability": 0.973,
+    "score": 88,
+    "level": "SEVERE",
+    "summary": "malware with harmful behaviour",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 58.4,
+      "reason": "Win32 detector says MALICIOUS (malware probability 0.973; suspicious from 0.268, malicious from 0.812)"
+     },
+     {
+      "part": "behaviour",
+      "points": 14.2,
+      "reason": "behaves like a trojan and a downloader (right 91% and 86% of the time on test)"
+     },
+     {
+      "part": "family",
+      "points": 5.0,
+      "reason": "family \"agenttesla\" (confidence 81%; right 93% of the time on test)"
+     },
+     {
+      "part": "evidence",
+      "points": 7.5,
+      "reason": "capa found 6 ATT&CK techniques, including process injection and a Run-key autostart"
+     },
+     {
+      "part": "context",
+      "points": 3.0,
+      "reason": "unsigned; stored in a download folder; ran on this PC"
+     },
+     {
+      "part": "deep check",
+      "points": 12.0,
+      "reason": "emulation saw it write a Run key and contact a web server"
+     }
+    ],
+    "attack": [
+     {
+      "id": "T1055",
+      "technique": "Process Injection",
+      "tactic": "Defense Evasion",
+      "sources": [
+       "capa",
+       "deep check"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1055/",
+       "summary": "Adversaries may inject code into processes in order to evade process-based defenses as well as possibly elevate privileges.",
+       "mitigations": [
+        {
+         "id": "M1040",
+         "name": "Behavior Prevention on Endpoint"
+        }
+       ]
+      }
+     },
+     {
+      "id": "T1547.001",
+      "technique": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+      "tactic": "Persistence",
+      "sources": [
+       "capa",
+       "deep check"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1547/001/",
+       "summary": "Adversaries may achieve persistence by adding a program to a startup folder or referencing it with a Registry run key.",
+       "mitigations": [
+        {
+         "id": "M1018",
+         "name": "User Account Management"
+        }
+       ]
+      }
+     },
+     {
+      "id": "T1071.001",
+      "technique": "Application Layer Protocol: Web Protocols",
+      "tactic": "Command and Control",
+      "sources": [
+       "deep check"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1071/001/",
+       "summary": "Adversaries may communicate using application layer protocols associated with web traffic to avoid detection.",
+       "mitigations": [
+        {
+         "id": "M1031",
+         "name": "Network Intrusion Prevention"
+        }
+       ]
+      }
+     },
+     {
+      "id": "T1555.003",
+      "technique": "Credentials from Password Stores: Credentials from Web Browsers",
+      "tactic": "Credential Access",
+      "sources": [
+       "capa"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1555/003/",
+       "summary": "Adversaries may acquire credentials from web browsers by reading files specific to the target browser.",
+       "mitigations": [
+        {
+         "id": "M1027",
+         "name": "Password Policies"
+        }
+       ]
+      }
+     },
+     {
+      "id": "T1027",
+      "technique": "Obfuscated Files or Information",
+      "tactic": "Defense Evasion",
+      "sources": [
+       "capa"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1027/",
+       "summary": "Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents.",
+       "mitigations": [
+        {
+         "id": "M1049",
+         "name": "Antivirus/Antimalware"
+        }
+       ]
+      }
+     },
+     {
+      "id": "T1082",
+      "technique": "System Information Discovery",
+      "tactic": "Discovery",
+      "sources": [
+       "capa"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1082/",
+       "summary": "An adversary may attempt to get detailed information about the operating system and hardware.",
+       "mitigations": []
+      }
+     }
+    ],
+    "behaviours": [
+     {
+      "tag": "trojan",
+      "tier": "strong",
+      "probability": 0.94
+     },
+     {
+      "tag": "downloader",
+      "tier": "normal",
+      "probability": 0.88
+     },
+     {
+      "tag": "passwordstealer",
+      "tier": "hint",
+      "probability": 0.71
+     }
+    ],
+    "family": {
+     "name": "agenttesla",
+     "confidence": 0.81,
+     "test_precision": 0.93
+    },
+    "floor": 80,
+    "cap": 100.0,
+    "advice": {
+     "headline": "It may be active on this PC - act now",
+     "actions": [
+      {
+       "priority": 1,
+       "action": "Disconnect this PC from the internet (Wi-Fi off or cable out)",
+       "because": "it ran on this PC and contacts a server",
+       "id": "disconnect"
+      },
+      {
+       "priority": 1,
+       "action": "End \"PhotoEditor_Pro_crack.exe\" in Task Manager (Details tab > End task)",
+       "because": "it is running now",
+       "id": "end_process"
+      },
+      {
+       "priority": 1,
+       "action": "Remove its autostart: Task Manager > Startup apps > \"PhotoUpdate\" > Disable",
+       "because": "it starts with Windows",
+       "id": "autostart"
+      },
+      {
+       "priority": 2,
+       "action": "Run a Microsoft Defender Offline scan: Windows Security > Virus & threat protection > Scan options > Microsoft Defender Offline scan > Scan now",
+       "because": "it has run on this PC and may have hidden itself",
+       "id": "offline_scan"
+      },
+      {
+       "priority": 2,
+       "action": "After the scan, delete the file yourself if it is still there",
+       "because": "threat level SEVERE",
+       "id": "delete_file"
+      },
+      {
+       "priority": 3,
+       "action": "From another device, change the passwords you saved in your browser or typed on this PC, starting with e-mail and banking",
+       "because": "it is tagged as a password stealer and it ran",
+       "id": "passwords"
+      }
+     ],
+     "notes": [
+      "MLWINT never deletes or quarantines files: every step is yours to do."
+     ]
+    },
+    "local_context": {
+     "facts": [
+      "came from cdn.free-download.example (Mark of the Web)",
+      "ran 2 times, last on 13 Nov 2026 22:14",
+      "is running now (process id 7412)",
+      "starts automatically: HKCU Run \"PhotoUpdate\"",
+      "Microsoft Defender has no record of it"
+     ]
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 46.1,
+    "reputation": {},
+    "deep_check": {
+     "status": "completed",
+     "engine": "Speakeasy 1.5.11 (emulation)",
+     "findings": [
+      {
+       "title": "writes itself to HKCU\\...\\Run (\"PhotoUpdate\")"
+      },
+      {
+       "title": "downloads a file from a web server"
+      },
+      {
+       "title": "reads browser profile folders"
+      }
+     ],
+     "observed": {
+      "servers": [
+       "update-check.example.net"
+      ]
+     }
+    }
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\free_vpn_setup.exe",
+    "sha256": "37f96b43530c3d743071979288162de7c9131247eb3ae40ff803846af8c633c3",
+    "format": "Win32",
+    "verdict": "SUSPICIOUS",
+    "probability": 0.61,
+    "score": 64,
+    "level": "HIGH",
+    "summary": "very likely malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 31.8,
+      "reason": "Win32 detector says SUSPICIOUS (malware probability 0.610; suspicious from 0.268, malicious from 0.812)"
+     },
+     {
+      "part": "behaviour",
+      "points": 9.8,
+      "reason": "behaves like adware and a potentially unwanted application (right 88% of the time on test)"
+     },
+     {
+      "part": "family",
+      "points": 0.0,
+      "reason": "family not identified with enough confidence"
+     },
+     {
+      "part": "evidence",
+      "points": 6.0,
+      "reason": "capa found 3 ATT&CK techniques"
+     },
+     {
+      "part": "context",
+      "points": 2.0,
+      "reason": "unsigned; stored in a download folder; never run"
+     }
+    ],
+    "attack": [
+     {
+      "id": "T1176",
+      "technique": "Browser Extensions",
+      "tactic": "Persistence",
+      "sources": [
+       "capa"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1176/",
+       "summary": "Adversaries may abuse Internet browser extensions to establish persistent access to victim systems.",
+       "mitigations": [
+        {
+         "id": "M1038",
+         "name": "Execution Prevention"
+        }
+       ]
+      }
+     },
+     {
+      "id": "T1112",
+      "technique": "Modify Registry",
+      "tactic": "Defense Evasion",
+      "sources": [
+       "capa"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1112/",
+       "summary": "Adversaries may interact with the Windows Registry to hide configuration information or remove information as part of cleaning up.",
+       "mitigations": [
+        {
+         "id": "M1024",
+         "name": "Restrict Registry Permissions"
+        }
+       ]
+      }
+     },
+     {
+      "id": "T1105",
+      "technique": "Ingress Tool Transfer",
+      "tactic": "Command and Control",
+      "sources": [
+       "capa"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1105/",
+       "summary": "Adversaries may transfer tools or other files from an external system into a compromised environment.",
+       "mitigations": [
+        {
+         "id": "M1031",
+         "name": "Network Intrusion Prevention"
+        }
+       ]
+      }
+     }
+    ],
+    "behaviours": [
+     {
+      "tag": "adware",
+      "tier": "normal",
+      "probability": 0.86
+     },
+     {
+      "tag": "pua",
+      "tier": "normal",
+      "probability": 0.83
+     }
+    ],
+    "family": null,
+    "floor": 60,
+    "cap": 100.0,
+    "advice": {
+     "headline": "Do not run it - delete it",
+     "actions": [
+      {
+       "priority": 1,
+       "action": "Do not open or install it",
+       "because": "very likely unwanted software and it has not run yet",
+       "id": "do_not_run"
+      },
+      {
+       "priority": 2,
+       "action": "Delete the file (and empty the Recycle Bin)",
+       "because": "threat level HIGH",
+       "id": "delete_file"
+      }
+     ],
+     "notes": [
+      "If you need a VPN, get it from the provider's own website or the Microsoft Store."
+     ]
+    },
+    "local_context": {
+     "facts": [
+      "came from vpn-free.example (Mark of the Web)",
+      "never run on this PC"
+     ]
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 38.4,
+    "reputation": {},
+    "deep_check": {
+     "status": "completed",
+     "engine": "Speakeasy 1.5.11 (emulation)",
+     "findings": [
+      {
+       "title": "installs a browser extension"
+      },
+      {
+       "title": "changes the browser start page"
+      }
+     ],
+     "observed": {
+      "servers": [
+       "ads.vpn-free.example"
+      ]
+     }
+    }
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\invoice_8831.pdf",
+    "sha256": "5acc205b6ea175469975e0e5bad0ae009e8212c58a122c6a133684e500e726f5",
+    "format": "PDF",
+    "verdict": "SUSPICIOUS",
+    "probability": 0.58,
+    "score": 47,
+    "level": "ELEVATED",
+    "summary": "clear warning signs",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 26.1,
+      "reason": "PDF detector says SUSPICIOUS (malware probability 0.580; suspicious from 0.141, malicious from 0.712)"
+     },
+     {
+      "part": "behaviour",
+      "points": 4.0,
+      "reason": "looks like an exploit document (right 89% of the time on test)"
+     },
+     {
+      "part": "evidence",
+      "points": 12.0,
+      "reason": "contains JavaScript (/JS) and an automatic action (/OpenAction)"
+     },
+     {
+      "part": "pdf rule",
+      "points": 0.0,
+      "reason": "the PDF holds content that can run, so it is not capped"
+     }
+    ],
+    "attack": [
+     {
+      "id": "T1059.007",
+      "technique": "Command and Scripting Interpreter: JavaScript",
+      "tactic": "Execution",
+      "sources": [
+       "pdf check"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1059/007/",
+       "summary": "Adversaries may abuse various implementations of JavaScript for execution.",
+       "mitigations": [
+        {
+         "id": "M1042",
+         "name": "Disable or Remove Feature or Program"
+        }
+       ]
+      }
+     }
+    ],
+    "behaviours": [
+     {
+      "tag": "exploit",
+      "tier": "normal",
+      "probability": 0.79
+     }
+    ],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "Do not open it until you know who sent it",
+     "actions": [
+      {
+       "priority": 1,
+       "action": "Do not open it. If you expected an invoice, ask the sender by phone or a known e-mail address",
+       "because": "it contains JavaScript that runs when the PDF opens",
+       "id": "do_not_open"
+      },
+      {
+       "priority": 2,
+       "action": "If you are sure it is not genuine, delete it",
+       "because": "clear warning signs",
+       "id": "delete_file"
+      }
+     ],
+     "notes": []
+    },
+    "local_context": {
+     "facts": [
+      "came as an e-mail attachment (Mark of the Web: Outlook)",
+      "never opened on this PC"
+     ]
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 2.1,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\bank_statement_october.pdf",
+    "sha256": "c3d66adc518958113b74ad125cd3b204b22fd04ffacf6dd78434f3584818b086",
+    "format": "PDF",
+    "verdict": "SUSPICIOUS",
+    "probability": 0.47,
+    "score": 39,
+    "level": "GUARDED",
+    "summary": "the detector finds it similar to phishing PDFs, but it contains nothing that can run: opening it is low risk - do not trust its links or forms unless you know the sender",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 26.8,
+      "reason": "PDF detector says SUSPICIOUS (malware probability 0.470; suspicious from 0.141, malicious from 0.712)"
+     },
+     {
+      "part": "evidence",
+      "points": 0.0,
+      "reason": "no risky elements"
+     },
+     {
+      "part": "pdf rule",
+      "points": -2.0,
+      "reason": "capped at 39: a PDF with nothing that can run"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 39.0,
+    "advice": {
+     "headline": "Probably harmless to open - be careful with its links",
+     "actions": [
+      {
+       "priority": 3,
+       "action": "Do not click links or fill in forms in this PDF unless you expected it; if it asks you to log in or pay, go to the website yourself instead of using the link",
+       "because": "the detector finds it similar to phishing documents, but it contains nothing that can run",
+       "id": "pdf_links"
+      }
+     ],
+     "notes": []
+    },
+    "local_context": {
+     "facts": [
+      "came from bank.example (Mark of the Web)"
+     ]
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 0.9,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\game_launcher_setup.exe",
+    "sha256": "352244fdd257f4c1962ea8efdf4524c97fdc6b4bde623806d5e380fc2b09a28b",
+    "format": "Win64",
+    "verdict": "SUSPICIOUS",
+    "probability": 0.31,
+    "score": 27,
+    "level": "GUARDED",
+    "summary": "weak warning signs",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 22.0,
+      "reason": "Win64 detector says SUSPICIOUS (malware probability 0.310; suspicious from 0.233, malicious from 0.790)"
+     },
+     {
+      "part": "behaviour",
+      "points": 1.0,
+      "reason": "possibly a potentially unwanted application (right 79% of the time on test)"
+     },
+     {
+      "part": "context",
+      "points": -10.0,
+      "reason": "valid digital signature (CN=Example Games Ltd); stored in a download folder"
+     }
+    ],
+    "attack": [],
+    "behaviours": [
+     {
+      "tag": "pua",
+      "tier": "hint",
+      "probability": 0.64
+     }
+    ],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "Fine if you expected it",
+     "actions": [
+      {
+       "priority": 4,
+       "action": "Install it only if you downloaded it from the publisher's own website; choose \"Custom install\" and untick extra offers",
+       "because": "weak warning signs, but it is signed",
+       "id": "custom_install"
+      }
+     ],
+     "notes": [
+      "it carries a valid signature from \"Example Games Ltd\": if that is the publisher you meant to get it from, this is very likely a false alarm"
+     ]
+    },
+    "local_context": {
+     "facts": [
+      "came from downloads.example-games.example (Mark of the Web)"
+     ]
+    },
+    "signature": {
+     "status": "Valid",
+     "signer": "CN=Example Games Ltd"
+    },
+    "seconds": 21.7,
+    "reputation": {},
+    "deep_check_reason": "signed and not flagged strongly"
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\TextEditor_Setup_8.6.exe",
+    "sha256": "cd847df1b873205ccd70bd741b9cb9084435a9c8c530611bcc9b57db9012420a",
+    "format": "Win64",
+    "verdict": "CLEAN",
+    "probability": 0.031,
+    "score": 4,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 1.9,
+      "reason": "Win64 detector says CLEAN (malware probability 0.031; suspicious from 0.233, malicious from 0.790)"
+     },
+     {
+      "part": "context",
+      "points": -10.0,
+      "reason": "valid digital signature (CN=Example Software Foundation)"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "Valid",
+     "signer": "CN=Example Software Foundation"
+    },
+    "seconds": 1.4,
+    "reputation": {},
+    "deep_check_reason": "clean verdict and signed or in a normal location"
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\usb_driver_tool_x64.exe",
+    "sha256": "796a3d884b95461fa8653aa020a586827d1b81fbe11e8204177fb899549be88a",
+    "format": "Win64",
+    "verdict": "CLEAN",
+    "probability": 0.081,
+    "score": 9,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 4.8,
+      "reason": "Win64 detector says CLEAN (malware probability 0.081)"
+     },
+     {
+      "part": "context",
+      "points": 0.0,
+      "reason": "unsigned; stored in a download folder"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 0.1,
+    "reputation": {},
+    "remembered": {
+     "day": "10 Nov 2026"
+    }
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\quarterly_report_q3.pdf",
+    "sha256": "868b33867e2c29eee38eaaf1104ed79631003f937f1060f87b0639fdeccc4145",
+    "format": "PDF",
+    "verdict": "CLEAN",
+    "probability": 0.02,
+    "score": 3,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 1.2,
+      "reason": "PDF detector says CLEAN (malware probability 0.020)"
+     },
+     {
+      "part": "evidence",
+      "points": 0.0,
+      "reason": "no risky elements"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 0.6,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\Contoso.Data.Helper.dll",
+    "sha256": "885b4561260ad7a9674e998adf168f9ddc2196de75f70b5931f47a6fe42ea208",
+    "format": ".NET",
+    "verdict": "CLEAN",
+    "probability": 0.004,
+    "score": 0,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 0.2,
+      "reason": ".NET detector says CLEAN (malware probability 0.004; suspicious from 0.212, malicious from 0.684)"
+     },
+     {
+      "part": "context",
+      "points": -10.0,
+      "reason": "valid digital signature (CN=Contoso Ltd)"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "Valid",
+     "signer": "CN=Contoso Ltd"
+    },
+    "seconds": 0.1,
+    "reputation": {},
+    "remembered": {
+     "day": "10 Nov 2026"
+    }
+   },
+   {
+    "status": "failed",
+    "path": "C:\\Users\\demo\\Downloads\\unfinished_download.exe",
+    "sha256": "4c5b6f66d1f0f1e719d3f8432d4c36a0a913d568f9ac0494ddca28b81bf01c6f",
+    "reason": "not a complete Windows program (the download was probably interrupted)",
+    "seconds": 0.0
+   }
+  ],
+  "analysis-20261110-183000.json": [
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\invoice_8831.pdf",
+    "sha256": "5acc205b6ea175469975e0e5bad0ae009e8212c58a122c6a133684e500e726f5",
+    "format": "PDF",
+    "verdict": "SUSPICIOUS",
+    "probability": 0.58,
+    "score": 31,
+    "level": "GUARDED",
+    "summary": "clear warning signs",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 26.1,
+      "reason": "PDF detector says SUSPICIOUS (malware probability 0.580; suspicious from 0.141, malicious from 0.712)"
+     },
+     {
+      "part": "behaviour",
+      "points": 4.0,
+      "reason": "looks like an exploit document (right 89% of the time on test)"
+     },
+     {
+      "part": "evidence",
+      "points": 12.0,
+      "reason": "contains JavaScript (/JS) and an automatic action (/OpenAction)"
+     },
+     {
+      "part": "pdf rule",
+      "points": 0.0,
+      "reason": "the PDF holds content that can run, so it is not capped"
+     }
+    ],
+    "attack": [
+     {
+      "id": "T1059.007",
+      "technique": "Command and Scripting Interpreter: JavaScript",
+      "tactic": "Execution",
+      "sources": [
+       "pdf check"
+      ],
+      "explanation": {
+       "url": "https://attack.mitre.org/techniques/T1059/007/",
+       "summary": "Adversaries may abuse various implementations of JavaScript for execution.",
+       "mitigations": [
+        {
+         "id": "M1042",
+         "name": "Disable or Remove Feature or Program"
+        }
+       ]
+      }
+     }
+    ],
+    "behaviours": [
+     {
+      "tag": "exploit",
+      "tier": "normal",
+      "probability": 0.79
+     }
+    ],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "Do not open it until you know who sent it",
+     "actions": [
+      {
+       "priority": 1,
+       "action": "Do not open it. If you expected an invoice, ask the sender by phone or a known e-mail address",
+       "because": "it contains JavaScript that runs when the PDF opens",
+       "id": "do_not_open"
+      },
+      {
+       "priority": 2,
+       "action": "If you are sure it is not genuine, delete it",
+       "because": "clear warning signs",
+       "id": "delete_file"
+      }
+     ],
+     "notes": []
+    },
+    "local_context": {
+     "facts": [
+      "came as an e-mail attachment (Mark of the Web: Outlook)",
+      "never opened on this PC"
+     ]
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 2.1,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\bank_statement_october.pdf",
+    "sha256": "c3d66adc518958113b74ad125cd3b204b22fd04ffacf6dd78434f3584818b086",
+    "format": "PDF",
+    "verdict": "SUSPICIOUS",
+    "probability": 0.47,
+    "score": 39,
+    "level": "GUARDED",
+    "summary": "the detector finds it similar to phishing PDFs, but it contains nothing that can run: opening it is low risk - do not trust its links or forms unless you know the sender",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 26.8,
+      "reason": "PDF detector says SUSPICIOUS (malware probability 0.470; suspicious from 0.141, malicious from 0.712)"
+     },
+     {
+      "part": "evidence",
+      "points": 0.0,
+      "reason": "no risky elements"
+     },
+     {
+      "part": "pdf rule",
+      "points": -2.0,
+      "reason": "capped at 39: a PDF with nothing that can run"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 39.0,
+    "advice": {
+     "headline": "Probably harmless to open - be careful with its links",
+     "actions": [
+      {
+       "priority": 3,
+       "action": "Do not click links or fill in forms in this PDF unless you expected it; if it asks you to log in or pay, go to the website yourself instead of using the link",
+       "because": "the detector finds it similar to phishing documents, but it contains nothing that can run",
+       "id": "pdf_links"
+      }
+     ],
+     "notes": []
+    },
+    "local_context": {
+     "facts": [
+      "came from bank.example (Mark of the Web)"
+     ]
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 0.9,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\game_launcher_setup.exe",
+    "sha256": "352244fdd257f4c1962ea8efdf4524c97fdc6b4bde623806d5e380fc2b09a28b",
+    "format": "Win64",
+    "verdict": "SUSPICIOUS",
+    "probability": 0.31,
+    "score": 27,
+    "level": "GUARDED",
+    "summary": "weak warning signs",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 22.0,
+      "reason": "Win64 detector says SUSPICIOUS (malware probability 0.310; suspicious from 0.233, malicious from 0.790)"
+     },
+     {
+      "part": "behaviour",
+      "points": 1.0,
+      "reason": "possibly a potentially unwanted application (right 79% of the time on test)"
+     },
+     {
+      "part": "context",
+      "points": -10.0,
+      "reason": "valid digital signature (CN=Example Games Ltd); stored in a download folder"
+     }
+    ],
+    "attack": [],
+    "behaviours": [
+     {
+      "tag": "pua",
+      "tier": "hint",
+      "probability": 0.64
+     }
+    ],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "Fine if you expected it",
+     "actions": [
+      {
+       "priority": 4,
+       "action": "Install it only if you downloaded it from the publisher's own website; choose \"Custom install\" and untick extra offers",
+       "because": "weak warning signs, but it is signed",
+       "id": "custom_install"
+      }
+     ],
+     "notes": [
+      "it carries a valid signature from \"Example Games Ltd\": if that is the publisher you meant to get it from, this is very likely a false alarm"
+     ]
+    },
+    "local_context": {
+     "facts": [
+      "came from downloads.example-games.example (Mark of the Web)"
+     ]
+    },
+    "signature": {
+     "status": "Valid",
+     "signer": "CN=Example Games Ltd"
+    },
+    "seconds": 21.7,
+    "reputation": {},
+    "deep_check_reason": "signed and not flagged strongly"
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\TextEditor_Setup_8.6.exe",
+    "sha256": "cd847df1b873205ccd70bd741b9cb9084435a9c8c530611bcc9b57db9012420a",
+    "format": "Win64",
+    "verdict": "CLEAN",
+    "probability": 0.031,
+    "score": 4,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 1.9,
+      "reason": "Win64 detector says CLEAN (malware probability 0.031; suspicious from 0.233, malicious from 0.790)"
+     },
+     {
+      "part": "context",
+      "points": -10.0,
+      "reason": "valid digital signature (CN=Example Software Foundation)"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "Valid",
+     "signer": "CN=Example Software Foundation"
+    },
+    "seconds": 1.4,
+    "reputation": {},
+    "deep_check_reason": "clean verdict and signed or in a normal location"
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\usb_driver_tool_x64.exe",
+    "sha256": "796a3d884b95461fa8653aa020a586827d1b81fbe11e8204177fb899549be88a",
+    "format": "Win64",
+    "verdict": "CLEAN",
+    "probability": 0.081,
+    "score": 9,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 4.8,
+      "reason": "Win64 detector says CLEAN (malware probability 0.081)"
+     },
+     {
+      "part": "context",
+      "points": 0.0,
+      "reason": "unsigned; stored in a download folder"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 0.1,
+    "reputation": {},
+    "remembered": {
+     "day": "10 Nov 2026"
+    }
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\quarterly_report_q3.pdf",
+    "sha256": "868b33867e2c29eee38eaaf1104ed79631003f937f1060f87b0639fdeccc4145",
+    "format": "PDF",
+    "verdict": "CLEAN",
+    "probability": 0.02,
+    "score": 3,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 1.2,
+      "reason": "PDF detector says CLEAN (malware probability 0.020)"
+     },
+     {
+      "part": "evidence",
+      "points": 0.0,
+      "reason": "no risky elements"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 0.6,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\Contoso.Data.Helper.dll",
+    "sha256": "885b4561260ad7a9674e998adf168f9ddc2196de75f70b5931f47a6fe42ea208",
+    "format": ".NET",
+    "verdict": "CLEAN",
+    "probability": 0.004,
+    "score": 0,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 0.2,
+      "reason": ".NET detector says CLEAN (malware probability 0.004; suspicious from 0.212, malicious from 0.684)"
+     },
+     {
+      "part": "context",
+      "points": -10.0,
+      "reason": "valid digital signature (CN=Contoso Ltd)"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "Valid",
+     "signer": "CN=Contoso Ltd"
+    },
+    "seconds": 0.1,
+    "reputation": {},
+    "remembered": {
+     "day": "10 Nov 2026"
+    }
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Downloads\\old_screen_recorder.exe",
+    "sha256": "bbc75a5b352d99a7eb18596b3f9d46937984ab62d43d9eda1b69670c4b4e0170",
+    "format": "Win32",
+    "verdict": "CLEAN",
+    "probability": 0.11,
+    "score": 12,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 6.2,
+      "reason": "Win32 detector says CLEAN (malware probability 0.110)"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 1.2,
+    "reputation": {}
+   }
+  ],
+  "analysis-20261105-120000.json": [
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Documents\\Work\\budget_2027.pdf",
+    "sha256": "9c92b7f0b94e6bd9dbaaff8e4664ba1d142ae18c8bb536b10a957197fee62110",
+    "format": "PDF",
+    "verdict": "CLEAN",
+    "probability": 0.03,
+    "score": 2,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 1.5,
+      "reason": "PDF detector says CLEAN"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 1.2,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Documents\\Work\\team_handbook.pdf",
+    "sha256": "307dda5cfd3c9211ad0c420488defbc356efe1eaf3e2e32196d25ac457ff163c",
+    "format": "PDF",
+    "verdict": "CLEAN",
+    "probability": 0.01,
+    "score": 1,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 0.5,
+      "reason": "PDF detector says CLEAN"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 1.2,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Documents\\Work\\ReportBuilder.exe",
+    "sha256": "38bc74216e12aaecbcc2abfa692efbb208506076d14a34f4864123b8dab0fce1",
+    "format": "Win64",
+    "verdict": "CLEAN",
+    "probability": 0.07,
+    "score": 6,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 3.5,
+      "reason": "Win64 detector says CLEAN"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 1.2,
+    "reputation": {}
+   },
+   {
+    "status": "assessed",
+    "path": "C:\\Users\\demo\\Documents\\Work\\PluginHost.dll",
+    "sha256": "44b4078b9cb40304608afac3e63466364d6061da3f4010c0898800e49fc20075",
+    "format": ".NET",
+    "verdict": "CLEAN",
+    "probability": 0.0,
+    "score": 0,
+    "level": "LOW",
+    "summary": "no meaningful sign of malware",
+    "parts": [
+     {
+      "part": "detector",
+      "points": 0.0,
+      "reason": ".NET detector says CLEAN"
+     }
+    ],
+    "attack": [],
+    "behaviours": [],
+    "family": null,
+    "floor": 0,
+    "cap": 100.0,
+    "advice": {
+     "headline": "No action needed",
+     "actions": [],
+     "notes": []
+    },
+    "local_context": {
+     "facts": []
+    },
+    "signature": {
+     "status": "NotSigned"
+    },
+    "seconds": 1.2,
+    "reputation": {}
+   }
+  ]
+ },
+ "health": [
+  {
+   "part": "Detectors (Phase 1)",
+   "ok": true,
+   "detail": "Win32, Win64, .NET and PDF detectors"
+  },
+  {
+   "part": "Family / behaviour models (Phase 2)",
+   "ok": true,
+   "detail": "loaded"
+  },
+  {
+   "part": "capa (code check)",
+   "ok": true,
+   "detail": "capa 9.4.0 with rules"
+  },
+  {
+   "part": "Speakeasy (safe simulation)",
+   "ok": true,
+   "detail": "Speakeasy 1.5.11"
+  },
+  {
+   "part": "MITRE ATT&CK data",
+   "ok": true,
+   "detail": "Enterprise ATT&CK, offline"
+  },
+  {
+   "part": "Microsoft Defender scanner (large files)",
+   "ok": true,
+   "detail": "MpCmdRun.exe"
+  },
+  {
+   "part": "Easy-to-read PDF reports",
+   "ok": true,
+   "detail": "Qt PDF writer"
+  },
+  {
+   "part": "Hash lookup keys",
+   "ok": true,
+   "detail": "none set (hash lookup stays off)"
+  }
+ ],
+ "privacy": "<b>What MLWINT does:</b> it reads files to check them and writes its own reports, memory and settings in the MLWINT folder.<br><b>What it never does:</b> delete, move, quarantine, run or upload your files. Every step in a report is for you to do.<br><b>What leaves this PC:</b> nothing - unless you switch Hash lookup on; then only SHA-256 fingerprints are sent to the services whose keys you entered. Never the file, its name or its folder.<br><b>Large-file check:</b> Microsoft Defender is asked to scan in report-only mode: it changes nothing.",
+ "scan": [
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\PhotoEditor_Pro_crack.exe",
+   "sha256": "63a256623bae2c4568b554e1b82511f69a7cf5e0a5a588987e8e34c087039ae1",
+   "format": "Win32",
+   "verdict": "MALICIOUS",
+   "probability": 0.973,
+   "score": 88,
+   "level": "SEVERE",
+   "summary": "malware with harmful behaviour",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 58.4,
+     "reason": "Win32 detector says MALICIOUS (malware probability 0.973; suspicious from 0.268, malicious from 0.812)"
+    },
+    {
+     "part": "behaviour",
+     "points": 14.2,
+     "reason": "behaves like a trojan and a downloader (right 91% and 86% of the time on test)"
+    },
+    {
+     "part": "family",
+     "points": 5.0,
+     "reason": "family \"agenttesla\" (confidence 81%; right 93% of the time on test)"
+    },
+    {
+     "part": "evidence",
+     "points": 7.5,
+     "reason": "capa found 6 ATT&CK techniques, including process injection and a Run-key autostart"
+    },
+    {
+     "part": "context",
+     "points": 3.0,
+     "reason": "unsigned; stored in a download folder; ran on this PC"
+    },
+    {
+     "part": "deep check",
+     "points": 12.0,
+     "reason": "emulation saw it write a Run key and contact a web server"
+    }
+   ],
+   "attack": [
+    {
+     "id": "T1055",
+     "technique": "Process Injection",
+     "tactic": "Defense Evasion",
+     "sources": [
+      "capa",
+      "deep check"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1055/",
+      "summary": "Adversaries may inject code into processes in order to evade process-based defenses as well as possibly elevate privileges.",
+      "mitigations": [
+       {
+        "id": "M1040",
+        "name": "Behavior Prevention on Endpoint"
+       }
+      ]
+     }
+    },
+    {
+     "id": "T1547.001",
+     "technique": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+     "tactic": "Persistence",
+     "sources": [
+      "capa",
+      "deep check"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1547/001/",
+      "summary": "Adversaries may achieve persistence by adding a program to a startup folder or referencing it with a Registry run key.",
+      "mitigations": [
+       {
+        "id": "M1018",
+        "name": "User Account Management"
+       }
+      ]
+     }
+    },
+    {
+     "id": "T1071.001",
+     "technique": "Application Layer Protocol: Web Protocols",
+     "tactic": "Command and Control",
+     "sources": [
+      "deep check"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1071/001/",
+      "summary": "Adversaries may communicate using application layer protocols associated with web traffic to avoid detection.",
+      "mitigations": [
+       {
+        "id": "M1031",
+        "name": "Network Intrusion Prevention"
+       }
+      ]
+     }
+    },
+    {
+     "id": "T1555.003",
+     "technique": "Credentials from Password Stores: Credentials from Web Browsers",
+     "tactic": "Credential Access",
+     "sources": [
+      "capa"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1555/003/",
+      "summary": "Adversaries may acquire credentials from web browsers by reading files specific to the target browser.",
+      "mitigations": [
+       {
+        "id": "M1027",
+        "name": "Password Policies"
+       }
+      ]
+     }
+    },
+    {
+     "id": "T1027",
+     "technique": "Obfuscated Files or Information",
+     "tactic": "Defense Evasion",
+     "sources": [
+      "capa"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1027/",
+      "summary": "Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents.",
+      "mitigations": [
+       {
+        "id": "M1049",
+        "name": "Antivirus/Antimalware"
+       }
+      ]
+     }
+    },
+    {
+     "id": "T1082",
+     "technique": "System Information Discovery",
+     "tactic": "Discovery",
+     "sources": [
+      "capa"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1082/",
+      "summary": "An adversary may attempt to get detailed information about the operating system and hardware.",
+      "mitigations": []
+     }
+    }
+   ],
+   "behaviours": [
+    {
+     "tag": "trojan",
+     "tier": "strong",
+     "probability": 0.94
+    },
+    {
+     "tag": "downloader",
+     "tier": "normal",
+     "probability": 0.88
+    },
+    {
+     "tag": "passwordstealer",
+     "tier": "hint",
+     "probability": 0.71
+    }
+   ],
+   "family": {
+    "name": "agenttesla",
+    "confidence": 0.81,
+    "test_precision": 0.93
+   },
+   "floor": 80,
+   "cap": 100.0,
+   "advice": {
+    "headline": "It may be active on this PC - act now",
+    "actions": [
+     {
+      "priority": 1,
+      "action": "Disconnect this PC from the internet (Wi-Fi off or cable out)",
+      "because": "it ran on this PC and contacts a server",
+      "id": "disconnect"
+     },
+     {
+      "priority": 1,
+      "action": "End \"PhotoEditor_Pro_crack.exe\" in Task Manager (Details tab > End task)",
+      "because": "it is running now",
+      "id": "end_process"
+     },
+     {
+      "priority": 1,
+      "action": "Remove its autostart: Task Manager > Startup apps > \"PhotoUpdate\" > Disable",
+      "because": "it starts with Windows",
+      "id": "autostart"
+     },
+     {
+      "priority": 2,
+      "action": "Run a Microsoft Defender Offline scan: Windows Security > Virus & threat protection > Scan options > Microsoft Defender Offline scan > Scan now",
+      "because": "it has run on this PC and may have hidden itself",
+      "id": "offline_scan"
+     },
+     {
+      "priority": 2,
+      "action": "After the scan, delete the file yourself if it is still there",
+      "because": "threat level SEVERE",
+      "id": "delete_file"
+     },
+     {
+      "priority": 3,
+      "action": "From another device, change the passwords you saved in your browser or typed on this PC, starting with e-mail and banking",
+      "because": "it is tagged as a password stealer and it ran",
+      "id": "passwords"
+     }
+    ],
+    "notes": [
+     "MLWINT never deletes or quarantines files: every step is yours to do."
+    ]
+   },
+   "local_context": {
+    "facts": [
+     "came from cdn.free-download.example (Mark of the Web)",
+     "ran 2 times, last on 13 Nov 2026 22:14",
+     "is running now (process id 7412)",
+     "starts automatically: HKCU Run \"PhotoUpdate\"",
+     "Microsoft Defender has no record of it"
+    ]
+   },
+   "signature": {
+    "status": "NotSigned"
+   },
+   "seconds": 46.1,
+   "reputation": {},
+   "deep_check": {
+    "status": "completed",
+    "engine": "Speakeasy 1.5.11 (emulation)",
+    "findings": [
+     {
+      "title": "writes itself to HKCU\\...\\Run (\"PhotoUpdate\")"
+     },
+     {
+      "title": "downloads a file from a web server"
+     },
+     {
+      "title": "reads browser profile folders"
+     }
+    ],
+    "observed": {
+     "servers": [
+      "update-check.example.net"
+     ]
+    }
+   }
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\free_vpn_setup.exe",
+   "sha256": "37f96b43530c3d743071979288162de7c9131247eb3ae40ff803846af8c633c3",
+   "format": "Win32",
+   "verdict": "SUSPICIOUS",
+   "probability": 0.61,
+   "score": 64,
+   "level": "HIGH",
+   "summary": "very likely malware",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 31.8,
+     "reason": "Win32 detector says SUSPICIOUS (malware probability 0.610; suspicious from 0.268, malicious from 0.812)"
+    },
+    {
+     "part": "behaviour",
+     "points": 9.8,
+     "reason": "behaves like adware and a potentially unwanted application (right 88% of the time on test)"
+    },
+    {
+     "part": "family",
+     "points": 0.0,
+     "reason": "family not identified with enough confidence"
+    },
+    {
+     "part": "evidence",
+     "points": 6.0,
+     "reason": "capa found 3 ATT&CK techniques"
+    },
+    {
+     "part": "context",
+     "points": 2.0,
+     "reason": "unsigned; stored in a download folder; never run"
+    }
+   ],
+   "attack": [
+    {
+     "id": "T1176",
+     "technique": "Browser Extensions",
+     "tactic": "Persistence",
+     "sources": [
+      "capa"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1176/",
+      "summary": "Adversaries may abuse Internet browser extensions to establish persistent access to victim systems.",
+      "mitigations": [
+       {
+        "id": "M1038",
+        "name": "Execution Prevention"
+       }
+      ]
+     }
+    },
+    {
+     "id": "T1112",
+     "technique": "Modify Registry",
+     "tactic": "Defense Evasion",
+     "sources": [
+      "capa"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1112/",
+      "summary": "Adversaries may interact with the Windows Registry to hide configuration information or remove information as part of cleaning up.",
+      "mitigations": [
+       {
+        "id": "M1024",
+        "name": "Restrict Registry Permissions"
+       }
+      ]
+     }
+    },
+    {
+     "id": "T1105",
+     "technique": "Ingress Tool Transfer",
+     "tactic": "Command and Control",
+     "sources": [
+      "capa"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1105/",
+      "summary": "Adversaries may transfer tools or other files from an external system into a compromised environment.",
+      "mitigations": [
+       {
+        "id": "M1031",
+        "name": "Network Intrusion Prevention"
+       }
+      ]
+     }
+    }
+   ],
+   "behaviours": [
+    {
+     "tag": "adware",
+     "tier": "normal",
+     "probability": 0.86
+    },
+    {
+     "tag": "pua",
+     "tier": "normal",
+     "probability": 0.83
+    }
+   ],
+   "family": null,
+   "floor": 60,
+   "cap": 100.0,
+   "advice": {
+    "headline": "Do not run it - delete it",
+    "actions": [
+     {
+      "priority": 1,
+      "action": "Do not open or install it",
+      "because": "very likely unwanted software and it has not run yet",
+      "id": "do_not_run"
+     },
+     {
+      "priority": 2,
+      "action": "Delete the file (and empty the Recycle Bin)",
+      "because": "threat level HIGH",
+      "id": "delete_file"
+     }
+    ],
+    "notes": [
+     "If you need a VPN, get it from the provider's own website or the Microsoft Store."
+    ]
+   },
+   "local_context": {
+    "facts": [
+     "came from vpn-free.example (Mark of the Web)",
+     "never run on this PC"
+    ]
+   },
+   "signature": {
+    "status": "NotSigned"
+   },
+   "seconds": 38.4,
+   "reputation": {},
+   "deep_check": {
+    "status": "completed",
+    "engine": "Speakeasy 1.5.11 (emulation)",
+    "findings": [
+     {
+      "title": "installs a browser extension"
+     },
+     {
+      "title": "changes the browser start page"
+     }
+    ],
+    "observed": {
+     "servers": [
+      "ads.vpn-free.example"
+     ]
+    }
+   }
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\invoice_8831.pdf",
+   "sha256": "5acc205b6ea175469975e0e5bad0ae009e8212c58a122c6a133684e500e726f5",
+   "format": "PDF",
+   "verdict": "SUSPICIOUS",
+   "probability": 0.58,
+   "score": 47,
+   "level": "ELEVATED",
+   "summary": "clear warning signs",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 26.1,
+     "reason": "PDF detector says SUSPICIOUS (malware probability 0.580; suspicious from 0.141, malicious from 0.712)"
+    },
+    {
+     "part": "behaviour",
+     "points": 4.0,
+     "reason": "looks like an exploit document (right 89% of the time on test)"
+    },
+    {
+     "part": "evidence",
+     "points": 12.0,
+     "reason": "contains JavaScript (/JS) and an automatic action (/OpenAction)"
+    },
+    {
+     "part": "pdf rule",
+     "points": 0.0,
+     "reason": "the PDF holds content that can run, so it is not capped"
+    }
+   ],
+   "attack": [
+    {
+     "id": "T1059.007",
+     "technique": "Command and Scripting Interpreter: JavaScript",
+     "tactic": "Execution",
+     "sources": [
+      "pdf check"
+     ],
+     "explanation": {
+      "url": "https://attack.mitre.org/techniques/T1059/007/",
+      "summary": "Adversaries may abuse various implementations of JavaScript for execution.",
+      "mitigations": [
+       {
+        "id": "M1042",
+        "name": "Disable or Remove Feature or Program"
+       }
+      ]
+     }
+    }
+   ],
+   "behaviours": [
+    {
+     "tag": "exploit",
+     "tier": "normal",
+     "probability": 0.79
+    }
+   ],
+   "family": null,
+   "floor": 0,
+   "cap": 100.0,
+   "advice": {
+    "headline": "Do not open it until you know who sent it",
+    "actions": [
+     {
+      "priority": 1,
+      "action": "Do not open it. If you expected an invoice, ask the sender by phone or a known e-mail address",
+      "because": "it contains JavaScript that runs when the PDF opens",
+      "id": "do_not_open"
+     },
+     {
+      "priority": 2,
+      "action": "If you are sure it is not genuine, delete it",
+      "because": "clear warning signs",
+      "id": "delete_file"
+     }
+    ],
+    "notes": []
+   },
+   "local_context": {
+    "facts": [
+     "came as an e-mail attachment (Mark of the Web: Outlook)",
+     "never opened on this PC"
+    ]
+   },
+   "signature": {
+    "status": "NotSigned"
+   },
+   "seconds": 2.1,
+   "reputation": {}
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\bank_statement_october.pdf",
+   "sha256": "c3d66adc518958113b74ad125cd3b204b22fd04ffacf6dd78434f3584818b086",
+   "format": "PDF",
+   "verdict": "SUSPICIOUS",
+   "probability": 0.47,
+   "score": 39,
+   "level": "GUARDED",
+   "summary": "the detector finds it similar to phishing PDFs, but it contains nothing that can run: opening it is low risk - do not trust its links or forms unless you know the sender",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 26.8,
+     "reason": "PDF detector says SUSPICIOUS (malware probability 0.470; suspicious from 0.141, malicious from 0.712)"
+    },
+    {
+     "part": "evidence",
+     "points": 0.0,
+     "reason": "no risky elements"
+    },
+    {
+     "part": "pdf rule",
+     "points": -2.0,
+     "reason": "capped at 39: a PDF with nothing that can run"
+    }
+   ],
+   "attack": [],
+   "behaviours": [],
+   "family": null,
+   "floor": 0,
+   "cap": 39.0,
+   "advice": {
+    "headline": "Probably harmless to open - be careful with its links",
+    "actions": [
+     {
+      "priority": 3,
+      "action": "Do not click links or fill in forms in this PDF unless you expected it; if it asks you to log in or pay, go to the website yourself instead of using the link",
+      "because": "the detector finds it similar to phishing documents, but it contains nothing that can run",
+      "id": "pdf_links"
+     }
+    ],
+    "notes": []
+   },
+   "local_context": {
+    "facts": [
+     "came from bank.example (Mark of the Web)"
+    ]
+   },
+   "signature": {
+    "status": "NotSigned"
+   },
+   "seconds": 0.9,
+   "reputation": {}
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\game_launcher_setup.exe",
+   "sha256": "352244fdd257f4c1962ea8efdf4524c97fdc6b4bde623806d5e380fc2b09a28b",
+   "format": "Win64",
+   "verdict": "SUSPICIOUS",
+   "probability": 0.31,
+   "score": 27,
+   "level": "GUARDED",
+   "summary": "weak warning signs",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 22.0,
+     "reason": "Win64 detector says SUSPICIOUS (malware probability 0.310; suspicious from 0.233, malicious from 0.790)"
+    },
+    {
+     "part": "behaviour",
+     "points": 1.0,
+     "reason": "possibly a potentially unwanted application (right 79% of the time on test)"
+    },
+    {
+     "part": "context",
+     "points": -10.0,
+     "reason": "valid digital signature (CN=Example Games Ltd); stored in a download folder"
+    }
+   ],
+   "attack": [],
+   "behaviours": [
+    {
+     "tag": "pua",
+     "tier": "hint",
+     "probability": 0.64
+    }
+   ],
+   "family": null,
+   "floor": 0,
+   "cap": 100.0,
+   "advice": {
+    "headline": "Fine if you expected it",
+    "actions": [
+     {
+      "priority": 4,
+      "action": "Install it only if you downloaded it from the publisher's own website; choose \"Custom install\" and untick extra offers",
+      "because": "weak warning signs, but it is signed",
+      "id": "custom_install"
+     }
+    ],
+    "notes": [
+     "it carries a valid signature from \"Example Games Ltd\": if that is the publisher you meant to get it from, this is very likely a false alarm"
+    ]
+   },
+   "local_context": {
+    "facts": [
+     "came from downloads.example-games.example (Mark of the Web)"
+    ]
+   },
+   "signature": {
+    "status": "Valid",
+    "signer": "CN=Example Games Ltd"
+   },
+   "seconds": 21.7,
+   "reputation": {},
+   "deep_check_reason": "signed and not flagged strongly"
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\TextEditor_Setup_8.6.exe",
+   "sha256": "cd847df1b873205ccd70bd741b9cb9084435a9c8c530611bcc9b57db9012420a",
+   "format": "Win64",
+   "verdict": "CLEAN",
+   "probability": 0.031,
+   "score": 4,
+   "level": "LOW",
+   "summary": "no meaningful sign of malware",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 1.9,
+     "reason": "Win64 detector says CLEAN (malware probability 0.031; suspicious from 0.233, malicious from 0.790)"
+    },
+    {
+     "part": "context",
+     "points": -10.0,
+     "reason": "valid digital signature (CN=Example Software Foundation)"
+    }
+   ],
+   "attack": [],
+   "behaviours": [],
+   "family": null,
+   "floor": 0,
+   "cap": 100.0,
+   "advice": {
+    "headline": "No action needed",
+    "actions": [],
+    "notes": []
+   },
+   "local_context": {
+    "facts": []
+   },
+   "signature": {
+    "status": "Valid",
+    "signer": "CN=Example Software Foundation"
+   },
+   "seconds": 1.4,
+   "reputation": {},
+   "deep_check_reason": "clean verdict and signed or in a normal location"
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\usb_driver_tool_x64.exe",
+   "sha256": "796a3d884b95461fa8653aa020a586827d1b81fbe11e8204177fb899549be88a",
+   "format": "Win64",
+   "verdict": "CLEAN",
+   "probability": 0.081,
+   "score": 9,
+   "level": "LOW",
+   "summary": "no meaningful sign of malware",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 4.8,
+     "reason": "Win64 detector says CLEAN (malware probability 0.081)"
+    },
+    {
+     "part": "context",
+     "points": 0.0,
+     "reason": "unsigned; stored in a download folder"
+    }
+   ],
+   "attack": [],
+   "behaviours": [],
+   "family": null,
+   "floor": 0,
+   "cap": 100.0,
+   "advice": {
+    "headline": "No action needed",
+    "actions": [],
+    "notes": []
+   },
+   "local_context": {
+    "facts": []
+   },
+   "signature": {
+    "status": "NotSigned"
+   },
+   "seconds": 0.1,
+   "reputation": {},
+   "remembered": {
+    "day": "10 Nov 2026"
+   }
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\quarterly_report_q3.pdf",
+   "sha256": "868b33867e2c29eee38eaaf1104ed79631003f937f1060f87b0639fdeccc4145",
+   "format": "PDF",
+   "verdict": "CLEAN",
+   "probability": 0.02,
+   "score": 3,
+   "level": "LOW",
+   "summary": "no meaningful sign of malware",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 1.2,
+     "reason": "PDF detector says CLEAN (malware probability 0.020)"
+    },
+    {
+     "part": "evidence",
+     "points": 0.0,
+     "reason": "no risky elements"
+    }
+   ],
+   "attack": [],
+   "behaviours": [],
+   "family": null,
+   "floor": 0,
+   "cap": 100.0,
+   "advice": {
+    "headline": "No action needed",
+    "actions": [],
+    "notes": []
+   },
+   "local_context": {
+    "facts": []
+   },
+   "signature": {
+    "status": "NotSigned"
+   },
+   "seconds": 0.6,
+   "reputation": {}
+  },
+  {
+   "status": "assessed",
+   "path": "C:\\Users\\demo\\Downloads\\Contoso.Data.Helper.dll",
+   "sha256": "885b4561260ad7a9674e998adf168f9ddc2196de75f70b5931f47a6fe42ea208",
+   "format": ".NET",
+   "verdict": "CLEAN",
+   "probability": 0.004,
+   "score": 0,
+   "level": "LOW",
+   "summary": "no meaningful sign of malware",
+   "parts": [
+    {
+     "part": "detector",
+     "points": 0.2,
+     "reason": ".NET detector says CLEAN (malware probability 0.004; suspicious from 0.212, malicious from 0.684)"
+    },
+    {
+     "part": "context",
+     "points": -10.0,
+     "reason": "valid digital signature (CN=Contoso Ltd)"
+    }
+   ],
+   "attack": [],
+   "behaviours": [],
+   "family": null,
+   "floor": 0,
+   "cap": 100.0,
+   "advice": {
+    "headline": "No action needed",
+    "actions": [],
+    "notes": []
+   },
+   "local_context": {
+    "facts": []
+   },
+   "signature": {
+    "status": "Valid",
+    "signer": "CN=Contoso Ltd"
+   },
+   "seconds": 0.1,
+   "reputation": {},
+   "remembered": {
+    "day": "10 Nov 2026"
+   }
+  },
+  {
+   "status": "failed",
+   "path": "C:\\Users\\demo\\Downloads\\unfinished_download.exe",
+   "sha256": "4c5b6f66d1f0f1e719d3f8432d4c36a0a913d568f9ac0494ddca28b81bf01c6f",
+   "reason": "not a complete Windows program (the download was probably interrupted)",
+   "seconds": 0.0
+  }
+ ]
+}
