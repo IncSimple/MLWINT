@@ -29,3 +29,16 @@ release/
 *.ubj
 *.joblib
 models/*.txt
+
+# MLWINT app: build output, local environments, user data (never commit keys or reports)
+dist/
+mlwint_app/build/
+mlwint_app/.dart_tool/
+mlwint_app/windows/flutter/ephemeral/
+experiments/
+config/
+reports/
+tools/capa-source-*/
+models/phase1/
+models/phase2/
+github-export-phase1/

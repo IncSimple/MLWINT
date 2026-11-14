@@ -1,0 +1,13 @@
+# Python 3.13 environment "speakeasy" (experiments/speakeasy/.venv). Install: python -m pip install -r environments/speakeasy.txt
+attrs==26.1.0
+capstone==5.0.9
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+lznt1==0.2
+pefile==2024.8.26
+pycryptodome==4.4.0
+referencing==0.37.0
+rpds-py==2026.9.1
+setuptools==80.10.2
+speakeasy-emulator==1.5.11
+unicorn==1.0.2

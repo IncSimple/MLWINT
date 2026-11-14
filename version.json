@@ -1,0 +1,6 @@
+{
+ "app": "1.0.0",
+ "models": "2026.11.1",
+ "models_fingerprint": "0764c5a85990",
+ "note": "app = the program (window + engine); models = the detector/classifier files in models/. Bump app for code changes, models for retrained models. packaging/build_release.py reads this file."
+}

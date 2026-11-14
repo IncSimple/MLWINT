@@ -1,6 +1,9 @@
 # Trained models
 
-The Phase 1 models are attached to the GitHub Release **`v1.0-phase1`** (not stored in the repository).
+Models are not stored in the repository; they are attached to GitHub Releases.
+
+- **For the app (`v1.0.0` and later):** `MLWINT-models-<version>.zip` holds `models/phase1` (detector bundle: cards, models, parity vectors, manifest) and `models/phase2` (family and behaviour classifiers). Unzip it into the repository root. The Windows installer already contains them.
+- **Phase 1 research release (`v1.0-phase1`):** the individual detector files below, with `SHA256SUMS.txt`.
 
 | File type | XGBoost | LightGBM | Detector card |
 |---|---|---|---|
