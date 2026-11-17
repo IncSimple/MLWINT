@@ -159,6 +159,28 @@ Key findings:
   therefore **caps PDFs that contain nothing that can run at 39 (Worth a look)** and says "do not trust its links"
   rather than "malware".
 
+### PDF detector retrained on real-world PDFs (models 2026.12.1, MLWINT 1.0.1)
+The tables above are the Phase 1 (EMBER-only) detectors. Because the EMBER PDF model over-flagged ordinary
+documents, it was retrained with **~80,000 clean PDFs from the public web**
+(SafeDocs CC-MAIN-2021-31 from [Digital Corpora](https://digitalcorpora.org/),
+100 archives spread over the corpus, split by archive into train / choose / holdout; PDFs with JavaScript,
+embedded files or launch actions are never counted as clean). A source audit found no feature that merely tells
+the two sources apart. Verdict thresholds must hold on EMBER clean **and** web clean PDFs. Pipeline:
+[pipeline/colab/pdf_realworld](pipeline/colab/pdf_realworld).
+
+| Files never used for training | 2026.12.1 | 2026.11.1 |
+|---|---|---|
+| Clean web PDFs called MALICIOUS | **0.66%** | 9.92% |
+| Clean web PDFs flagged (malicious + suspicious) | **3.36%** | 16.72% |
+| EMBER clean PDFs flagged (weeks 52-63) | **2.52%** | 6.55% |
+| EMBER PDF malware flagged (weeks 52-63) | 95.28% | 97.80% |
+| EMBER PDF malware called MALICIOUS | 81.33% | 93.50% |
+
+Held to the same false-alarm limit on real web PDFs, the new detector catches more malware at every level
+(1%: **89.8% vs 74.3%**; 3%: 95.3% vs 87.6%). The acceptance rule fixed before training (94.97% at 1%) was **not
+met**; the update was adopted on this fair comparison, and the report says so. Remaining false alarms are mostly
+small, link-heavy PDFs, the shape of phishing documents.
+
 ### Analysis (Phase 2)
 Family and behaviour classifiers (XGBoost, EMBER2024 tags), evaluated once on the test weeks after tuning on
 development data. Family names are shown only at ≥ 90% precision; behaviour tags are weighted by their tested
@@ -307,8 +329,8 @@ models by itself and re-checks files. Details: [packaging/README.md](packaging/R
 
 - **Static ML has blind spots:** packed or encrypted programs, brand-new families and borderline "grayware".
   A score is evidence, not proof; the advice says so.
-- **One dataset.** Models are trained and tested on EMBER2024; real-world PDFs differ (handled with the PDF cap,
-  and a retrain on real clean PDFs is planned).
+- **One dataset for malware.** Malware comes only from EMBER2024 (to 2024). The PDF detector also learned from real
+  web PDFs (2021), but its malware recall is still measured on EMBER PDF malware only.
 - **Emulation is partial:** modern system binaries often stop early in Speakeasy; MLWINT reports the coverage
   honestly ("saw very little").
 - **Windows only** (Win32, Win64, .NET, PDF). ELF and Android models were explored but are out of scope.

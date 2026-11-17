@@ -15,10 +15,11 @@ three-level verdict (malicious / suspicious / clean). See [phase1-results.md](ph
   mitigations, opt-in hash-only reputation, prioritised plain-language advice.
 - Desktop app (Flutter, Material 3), scan memory, whole-PC and large-file checks, easy-to-read PDF reports,
   history with comparisons, Windows installer with in-place updates (v1.0.0).
+- PDF detector retrained with ~80,000 real-world clean PDFs (SafeDocs): clean web PDFs called MALICIOUS
+  9.92% -> 0.66% (v1.0.1, models 2026.12.1).
 
 ## Next
-- **PDF detector retrain on real-world clean PDFs** (the EMBER2024 PDF model over-flags ordinary documents;
-  currently handled by the PDF cap).
+- PDF: more malware sources (recent phishing PDFs) to measure recall beyond EMBER; consider relaxing the PDF cap.
 - An outside reality check on recent files from a different source.
 - Periodic retraining on newer weeks; drift monitoring.
 - Code-signed installer; optional in-app update check.
